@@ -14,6 +14,7 @@
 //@synthesize inputText;
 @synthesize postConnection;
 
+int flag;
 
 -(void) postMessage:(NSString *)myString
 {
@@ -53,6 +54,7 @@
 {
     NSMutableString *getString = [NSMutableString stringWithString:kPostUrl];
     
+    NSLog(@"%d", flag);
     [getString appendString:[NSString stringWithFormat:@"?%@=%@", kFunctionName, @"getAllGroups"]];
     
     
@@ -75,6 +77,7 @@
     json = [[NSDictionary alloc] init];
     
     NSError *error;
+    NSArray *array;
     
     if([data length] > 0)
     {
@@ -85,13 +88,27 @@
         for (NSDictionary *d in json)
         {
             //NSString *groupName = [json valueForKey:@"ID                     "];
+        
             
-            
+            if (flag == 1) {
+                array = [json valueForKey:@"ID"];
+            }
+            else if (flag == 0){
+                array = [json valueForKey:@"Name"];
+            }
         }
     }
-    NSArray *array;
-    array = [[NSArray alloc]initWithObjects:@"Venka Bhosdi Wala", @"ABCD",@"EFGH", nil];
     
+   /*
+        
+        if (flag == 1) {
+            array = [[NSArray alloc]initWithObjects:@"Venka Bhosdi Wala", @"ABCD",@"EFGH", nil];
+        }
+        else if (flag ==0){
+            array = [[NSArray alloc]initWithObjects:@"Renaldo", @"Girlfriend",@"lol",@"abcd",@"efgh",@"ijk",@"lmn",@"opq",@"rst",@"uvw", nil];
+        }
+    
+    */
     [[NSNotificationCenter defaultCenter]
      postNotificationName:@"TestNotification"
      object:array];

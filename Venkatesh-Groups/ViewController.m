@@ -12,13 +12,18 @@
  
 @interface ViewController (){
     
+        
 }
 
 @end
 
 @implementation ViewController
 
+extern int flag;
+
+
 @synthesize array;
+@synthesize FGbar;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -54,18 +59,7 @@
 }
 
 
-- (IBAction)onClick:(id)sender {
-    
-    [self GetGroups];
-    
-    
-    //array = [[NSArray alloc]initWithObjects:@"Venka Bhosdi Wala", @"ABCD",@"EFGH", nil];
-    self.Populate.delegate = self;
-    self.Populate.dataSource = self;
-    [self.Populate reloadData];
-    
 
-}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
@@ -86,4 +80,29 @@
     return cell;
 }
 
+- (IBAction)onAction:(id)sender {
+    
+    if (FGbar.selectedSegmentIndex == 0)
+    {
+        flag = 0;
+    [self GetGroups];
+    
+    
+    //array = [[NSArray alloc]initWithObjects:@"Venka Bhosdi Wala", @"ABCD",@"EFGH", nil];
+    self.Populate.delegate = self;
+    self.Populate.dataSource = self;
+    [self.Populate reloadData];
+    }
+    else if (FGbar.selectedSegmentIndex == 1) {
+        flag = 1;
+            [self GetGroups];
+        
+        
+        self.Populate.delegate = self;
+        self.Populate.dataSource = self;
+        [self.Populate reloadData];
+
+    }
+
+}
 @end

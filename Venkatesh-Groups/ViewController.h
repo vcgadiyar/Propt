@@ -10,7 +10,10 @@
 
 @interface ViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 
-- (IBAction)onClick:(id)sender;
+@property (strong, nonatomic) IBOutlet UISegmentedControl *FGbar;
+
+
 @property NSArray *array;
+- (IBAction)onAction:(id)sender;
 @property (strong, nonatomic) IBOutlet UITableView *Populate;
 @end

@@ -19,6 +19,8 @@
 		2549267816D33A08008D4266 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2549267716D33A08008D4266 /* ViewController.m */; };
 		2549267B16D33A08008D4266 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2549267916D33A08008D4266 /* ViewController.xib */; };
 		2549268316D33A90008D4266 /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = 2549268216D33A90008D4266 /* Database.m */; };
+		C53EBE4716D40A5A00364D6D /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C53EBE4516D40A5A00364D6D /* FirstViewController.m */; };
+		C53EBE4816D40A5A00364D6D /* FirstViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C53EBE4616D40A5A00364D6D /* FirstViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,9 @@
 		2549267A16D33A08008D4266 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
 		2549268116D33A90008D4266 /* Database.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Database.h; sourceTree = "<group>"; };
 		2549268216D33A90008D4266 /* Database.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Database.m; sourceTree = "<group>"; };
+		C53EBE4416D40A5A00364D6D /* FirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
+		C53EBE4516D40A5A00364D6D /* FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
+		C53EBE4616D40A5A00364D6D /* FirstViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FirstViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +99,9 @@
 				2549267716D33A08008D4266 /* ViewController.m */,
 				2549267916D33A08008D4266 /* ViewController.xib */,
 				2549266516D33A08008D4266 /* Supporting Files */,
+				C53EBE4416D40A5A00364D6D /* FirstViewController.h */,
+				C53EBE4516D40A5A00364D6D /* FirstViewController.m */,
+				C53EBE4616D40A5A00364D6D /* FirstViewController.xib */,
 			);
 			path = "Venkatesh-Groups";
 			sourceTree = "<group>";
@@ -168,6 +176,7 @@
 				2549267316D33A08008D4266 /* Default@2x.png in Resources */,
 				2549267516D33A08008D4266 /* Default-568h@2x.png in Resources */,
 				2549267B16D33A08008D4266 /* ViewController.xib in Resources */,
+				C53EBE4816D40A5A00364D6D /* FirstViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -182,6 +191,7 @@
 				2549266F16D33A08008D4266 /* AppDelegate.m in Sources */,
 				2549267816D33A08008D4266 /* ViewController.m in Sources */,
 				2549268316D33A90008D4266 /* Database.m in Sources */,
+				C53EBE4716D40A5A00364D6D /* FirstViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,6 +308,7 @@
 				2549268016D33A08008D4266 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
