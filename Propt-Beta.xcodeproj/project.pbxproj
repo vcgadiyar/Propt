@@ -22,6 +22,10 @@
 		C59BFD8C16D6A34F00F4D818 /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = C59BFD8B16D6A34F00F4D818 /* Database.m */; };
 		C59BFD9016D6A4F700F4D818 /* GroupsGames.m in Sources */ = {isa = PBXBuildFile; fileRef = C59BFD8E16D6A4F700F4D818 /* GroupsGames.m */; };
 		C59BFD9116D6A4F700F4D818 /* GroupsGames.xib in Resources */ = {isa = PBXBuildFile; fileRef = C59BFD8F16D6A4F700F4D818 /* GroupsGames.xib */; };
+		C59BFD9516D7258300F4D818 /* NewGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = C59BFD9316D7258300F4D818 /* NewGroup.m */; };
+		C59BFD9616D7258300F4D818 /* NewGroup.xib in Resources */ = {isa = PBXBuildFile; fileRef = C59BFD9416D7258300F4D818 /* NewGroup.xib */; };
+		C59BFD9816D7361300F4D818 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C59BFD9716D7361300F4D818 /* AddressBook.framework */; };
+		C59BFD9A16D7361700F4D818 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C59BFD9916D7361700F4D818 /* AddressBookUI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +51,11 @@
 		C59BFD8D16D6A4F700F4D818 /* GroupsGames.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupsGames.h; sourceTree = "<group>"; };
 		C59BFD8E16D6A4F700F4D818 /* GroupsGames.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupsGames.m; sourceTree = "<group>"; };
 		C59BFD8F16D6A4F700F4D818 /* GroupsGames.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GroupsGames.xib; sourceTree = "<group>"; };
+		C59BFD9216D7258300F4D818 /* NewGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewGroup.h; sourceTree = "<group>"; };
+		C59BFD9316D7258300F4D818 /* NewGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewGroup.m; sourceTree = "<group>"; };
+		C59BFD9416D7258300F4D818 /* NewGroup.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewGroup.xib; sourceTree = "<group>"; };
+		C59BFD9716D7361300F4D818 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		C59BFD9916D7361700F4D818 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +63,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C59BFD9A16D7361700F4D818 /* AddressBookUI.framework in Frameworks */,
+				C59BFD9816D7361300F4D818 /* AddressBook.framework in Frameworks */,
 				C59BFD6616D69F4E00F4D818 /* UIKit.framework in Frameworks */,
 				C59BFD6816D69F4E00F4D818 /* Foundation.framework in Frameworks */,
 				C59BFD6A16D69F4E00F4D818 /* CoreGraphics.framework in Frameworks */,
@@ -66,6 +77,8 @@
 		C59BFD5916D69F4E00F4D818 = {
 			isa = PBXGroup;
 			children = (
+				C59BFD9916D7361700F4D818 /* AddressBookUI.framework */,
+				C59BFD9716D7361300F4D818 /* AddressBook.framework */,
 				C59BFD6B16D69F4E00F4D818 /* Propt-Beta */,
 				C59BFD6416D69F4E00F4D818 /* Frameworks */,
 				C59BFD6316D69F4E00F4D818 /* Products */,
@@ -104,6 +117,9 @@
 				C59BFD8D16D6A4F700F4D818 /* GroupsGames.h */,
 				C59BFD8E16D6A4F700F4D818 /* GroupsGames.m */,
 				C59BFD8F16D6A4F700F4D818 /* GroupsGames.xib */,
+				C59BFD9216D7258300F4D818 /* NewGroup.h */,
+				C59BFD9316D7258300F4D818 /* NewGroup.m */,
+				C59BFD9416D7258300F4D818 /* NewGroup.xib */,
 			);
 			path = "Propt-Beta";
 			sourceTree = "<group>";
@@ -181,6 +197,7 @@
 				C59BFD8216D69F4E00F4D818 /* ViewController.xib in Resources */,
 				C59BFD8916D6A05300F4D818 /* nfl.jpg in Resources */,
 				C59BFD9116D6A4F700F4D818 /* GroupsGames.xib in Resources */,
+				C59BFD9616D7258300F4D818 /* NewGroup.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,6 +213,7 @@
 				C59BFD7F16D69F4E00F4D818 /* ViewController.m in Sources */,
 				C59BFD8C16D6A34F00F4D818 /* Database.m in Sources */,
 				C59BFD9016D6A4F700F4D818 /* GroupsGames.m in Sources */,
+				C59BFD9516D7258300F4D818 /* NewGroup.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

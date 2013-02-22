@@ -8,6 +8,8 @@
 
 #import "GroupsGames.h"
 #include "Database.h"
+#include "NewGroup.h"
+#import "ViewController.h"
 
 @interface GroupsGames ()
 
@@ -17,13 +19,14 @@
 
 extern NSString *pname;
 
-@synthesize plName;
+
 
 extern int flag;
 
-
+@synthesize gName;
 @synthesize array;
 @synthesize FGbar;
+@synthesize myVC;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,10 +40,12 @@ extern int flag;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.navigationItem.hidesBackButton = NO;
     NSString *abc = [NSString stringWithFormat:@"Welcome %@",pname];
-    
-    plName.text = abc;
-    flag = 1;
+    [[UINavigationBar appearance] setTintColor:[UIColor blueColor]];
+    [[UIToolbar appearance] setTintColor:[UIColor blueColor]];
+    gName.topItem.title = abc;
+    flag = 0;
     
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -49,8 +54,8 @@ extern int flag;
                                                object:nil];
 
     // Do any additional setup after loading the view from its nib.
-    //[self GetGroups];
-    array = [[NSArray alloc]initWithObjects:@"Venka Bhosdi Wala", @"ABCD",@"EFGH", nil];
+    [self GetGroups];
+    //array = [[NSArray alloc]initWithObjects:@"Venka Bhosdi Wala", @"ABCD",@"EFGH", nil];
     
     self.Populate.delegate = self;
     self.Populate.dataSource = self;
@@ -128,4 +133,15 @@ extern int flag;
     }
 
 }
+- (IBAction)createGroup:(id)sender {
+    myVC = [[NewGroup alloc]initWithNibName:@"NewGroup" bundle:nil];
+    
+    [self.view addSubview:myVC.view];
+    
+}
+
+- (IBAction)goto1:(id)sender {
+    //[self dismissModalViewControllerAnimated:YES];
+}
+
 @end

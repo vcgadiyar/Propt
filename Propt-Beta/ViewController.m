@@ -12,6 +12,7 @@
 
 //Player's name
 NSString *pname;
+extern int screen;
 
 @interface ViewController ()
 
@@ -20,7 +21,9 @@ NSString *pname;
 @implementation ViewController
 - (void)viewDidLoad
 {
+    screen = 0;
     [super viewDidLoad];
+    //self.name.delegate = self;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
     self->offset = self.view.center;
@@ -28,7 +31,10 @@ NSString *pname;
 }
 - (void)keyboardDidShow:(NSNotification *)note
 {
-    self.view.center = CGPointMake(self->offset.x, 60);
+    if (screen == 0) {
+        self.view.center = CGPointMake(self->offset.x, 60);
+    }
+    
     /* move your views here */
 }
 

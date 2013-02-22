@@ -7,15 +7,28 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NewGroup.h"
+//#import "ViewController.h"
 
 @interface GroupsGames : UIViewController<UITableViewDataSource, UITableViewDelegate>
 {
+    
+    NewGroup *myVC;
+    //ViewController *pg1;
+
 }
+@property (strong, nonatomic) IBOutlet UINavigationBar *gName;
+
+@property (strong, nonatomic)NewGroup *myVC;
+//@property (strong, nonatomic)ViewController *pg1;
+@property (strong, nonatomic) IBOutlet UINavigationItem *back;
 
 
-@property (strong, nonatomic) IBOutlet UILabel *plName;
 @property (nonatomic, retain) IBOutlet UISegmentedControl *FGbar;
 @property (nonatomic, retain) IBOutlet UITableView *Populate;
+@property (strong, nonatomic) IBOutlet UIToolbar *upBar;
+- (IBAction)createGroup:(id)sender;
+- (IBAction)goto1:(id)sender;
 
 @property NSArray *array;
 - (IBAction)onAction:(id)sender;
