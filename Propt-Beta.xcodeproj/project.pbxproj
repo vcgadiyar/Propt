@@ -18,6 +18,10 @@
 		C59BFD7C16D69F4E00F4D818 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C59BFD7B16D69F4E00F4D818 /* Default-568h@2x.png */; };
 		C59BFD7F16D69F4E00F4D818 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C59BFD7E16D69F4E00F4D818 /* ViewController.m */; };
 		C59BFD8216D69F4E00F4D818 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C59BFD8016D69F4E00F4D818 /* ViewController.xib */; };
+		C59BFD8916D6A05300F4D818 /* nfl.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C59BFD8816D6A05300F4D818 /* nfl.jpg */; };
+		C59BFD8C16D6A34F00F4D818 /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = C59BFD8B16D6A34F00F4D818 /* Database.m */; };
+		C59BFD9016D6A4F700F4D818 /* GroupsGames.m in Sources */ = {isa = PBXBuildFile; fileRef = C59BFD8E16D6A4F700F4D818 /* GroupsGames.m */; };
+		C59BFD9116D6A4F700F4D818 /* GroupsGames.xib in Resources */ = {isa = PBXBuildFile; fileRef = C59BFD8F16D6A4F700F4D818 /* GroupsGames.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +41,12 @@
 		C59BFD7D16D69F4E00F4D818 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		C59BFD7E16D69F4E00F4D818 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		C59BFD8116D69F4E00F4D818 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
+		C59BFD8816D6A05300F4D818 /* nfl.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = nfl.jpg; path = ../../../../Downloads/nfl.jpg; sourceTree = "<group>"; };
+		C59BFD8A16D6A34F00F4D818 /* Database.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Database.h; path = "../../Propt-First Iteration/Propt-First Iteration/Database.h"; sourceTree = "<group>"; };
+		C59BFD8B16D6A34F00F4D818 /* Database.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Database.m; path = "../../Propt-First Iteration/Propt-First Iteration/Database.m"; sourceTree = "<group>"; };
+		C59BFD8D16D6A4F700F4D818 /* GroupsGames.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupsGames.h; sourceTree = "<group>"; };
+		C59BFD8E16D6A4F700F4D818 /* GroupsGames.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupsGames.m; sourceTree = "<group>"; };
+		C59BFD8F16D6A4F700F4D818 /* GroupsGames.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GroupsGames.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,12 +93,17 @@
 		C59BFD6B16D69F4E00F4D818 /* Propt-Beta */ = {
 			isa = PBXGroup;
 			children = (
+				C59BFD8A16D6A34F00F4D818 /* Database.h */,
+				C59BFD8B16D6A34F00F4D818 /* Database.m */,
 				C59BFD7416D69F4E00F4D818 /* AppDelegate.h */,
 				C59BFD7516D69F4E00F4D818 /* AppDelegate.m */,
 				C59BFD7D16D69F4E00F4D818 /* ViewController.h */,
 				C59BFD7E16D69F4E00F4D818 /* ViewController.m */,
 				C59BFD8016D69F4E00F4D818 /* ViewController.xib */,
 				C59BFD6C16D69F4E00F4D818 /* Supporting Files */,
+				C59BFD8D16D6A4F700F4D818 /* GroupsGames.h */,
+				C59BFD8E16D6A4F700F4D818 /* GroupsGames.m */,
+				C59BFD8F16D6A4F700F4D818 /* GroupsGames.xib */,
 			);
 			path = "Propt-Beta";
 			sourceTree = "<group>";
@@ -96,6 +111,7 @@
 		C59BFD6C16D69F4E00F4D818 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C59BFD8816D6A05300F4D818 /* nfl.jpg */,
 				C59BFD6D16D69F4E00F4D818 /* Propt-Beta-Info.plist */,
 				C59BFD6E16D69F4E00F4D818 /* InfoPlist.strings */,
 				C59BFD7116D69F4E00F4D818 /* main.m */,
@@ -163,6 +179,8 @@
 				C59BFD7A16D69F4E00F4D818 /* Default@2x.png in Resources */,
 				C59BFD7C16D69F4E00F4D818 /* Default-568h@2x.png in Resources */,
 				C59BFD8216D69F4E00F4D818 /* ViewController.xib in Resources */,
+				C59BFD8916D6A05300F4D818 /* nfl.jpg in Resources */,
+				C59BFD9116D6A4F700F4D818 /* GroupsGames.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,6 +194,8 @@
 				C59BFD7216D69F4E00F4D818 /* main.m in Sources */,
 				C59BFD7616D69F4E00F4D818 /* AppDelegate.m in Sources */,
 				C59BFD7F16D69F4E00F4D818 /* ViewController.m in Sources */,
+				C59BFD8C16D6A34F00F4D818 /* Database.m in Sources */,
+				C59BFD9016D6A4F700F4D818 /* GroupsGames.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

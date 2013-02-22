@@ -7,7 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GroupsGames.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController<UIScrollViewDelegate, UITextFieldDelegate>
+{
+    
+    IBOutlet UITextField *number;
+    IBOutlet UITextField *name;
+    CGPoint        offset;
+    GroupsGames *myViewController;
+}
+- (IBAction)onClick:(id)sender;
+@property (strong, nonatomic)GroupsGames *myViewController;
+- (IBAction)switchView:(id)sender;
+
 
 @end
