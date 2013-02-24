@@ -385,13 +385,13 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Propt-Beta/Contacts.m"
-         timestampString = "383359045.266437"
+         timestampString = "383367491.317082"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "216"
-         endingLineNumber = "216"
-         landmarkName = "@implementation Contacts"
-         landmarkType = "3">
+         startingLineNumber = "219"
+         endingLineNumber = "219"
+         landmarkName = "-switchBack:"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -446,7 +446,7 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Propt-Beta/ViewController.m"

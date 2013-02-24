@@ -67,7 +67,7 @@ int screen;
 - (IBAction)showPicker:(id)sender {
     myVC = [[Contacts alloc]initWithNibName:@"Contacts" bundle:nil];
     
-    [self.view addSubview:myVC.view];
+  [self presentViewController:myVC animated:YES completion:nil];
     
     
     
@@ -76,12 +76,15 @@ int screen;
     [[ABPeoplePickerNavigationController alloc] init];
     picker.peoplePickerDelegate = self;
     [self presentModalViewController:picker animated:YES];
-}
+}*/
 
 - (IBAction)backto2:(id)sender {
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+
 }
 
-
+/*
 - (void)peoplePickerNavigationControllerDidCancel: (ABPeoplePickerNavigationController *)peoplePicker
 {
     [self dismissModalViewControllerAnimated:YES];

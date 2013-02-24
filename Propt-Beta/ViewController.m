@@ -83,7 +83,7 @@ extern int screen;
 
     myViewController = [[GroupsGames alloc]initWithNibName:@"GroupsGames" bundle:nil];
     
-    [self.view addSubview:myViewController.view];
+    [self presentViewController:myViewController animated:YES completion:nil];
     //[navigationController pushViewController:myViewController]
 }
 

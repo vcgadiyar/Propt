@@ -237,12 +237,13 @@ extern int flag;
 - (IBAction)createGroup:(id)sender {
     myVC = [[NewGroup alloc]initWithNibName:@"NewGroup" bundle:nil];
     
-    [self.view addSubview:myVC.view];
+    [self presentViewController:myVC animated:YES completion:nil];
     
 }
 
 - (IBAction)goto1:(id)sender {
     //[self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

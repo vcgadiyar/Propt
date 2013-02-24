@@ -35,7 +35,7 @@ extern int screen;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    self.Populate.allowsMultipleSelection = YES;
     screen = 4;
     isFiltered = FALSE;
     searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
@@ -170,6 +170,9 @@ extern int screen;
        cell.textLabel.text = [allTableData objectAtIndex:indexPath.row];
       
         cell.imageView.image = [UIImage imageNamed:@"smiley.jpg"];
+    UIView *selectionColor = [[UIView alloc] init];
+    selectionColor.backgroundColor = [UIColor colorWithRed:(106/255.0) green:(99/255.0) blue:(255/255.0) alpha:1];
+    cell.selectedBackgroundView = selectionColor;
    
            
         if([self->checkedIndexPath isEqual:indexPath])
@@ -215,6 +218,8 @@ extern int screen;
 }*/
 - (IBAction)switchBack:(Contacts *)ctr {
     //[self dismissViewControllerAnimated:YES completion:nil];
-    [ctr.navigationController popViewControllerAnimated:YES];
+    //[ctr.navigationController popViewControllerAnimated:YES];
+    
+     [self dismissViewControllerAnimated:YES completion:nil];
 }
 @end
