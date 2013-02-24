@@ -15,11 +15,14 @@
 @end
 NSString *fname;
 NSString *pNumber;
+NSString *groupName;
 @implementation NewGroup
 int screen;
+//NSMutableArray *sname;
 
 
 @synthesize myTextfield;
+@synthesize grouptab;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -34,7 +37,9 @@ int screen;
 {
     screen = 3;
     [super viewDidLoad];
-    self.myTextfield.delegate = self;
+    //Contacts *controller = [[Contacts alloc] init];
+    //controller.sname = names;
+    
     [[UINavigationBar appearance] setTintColor:[UIColor blueColor]];
     /*[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
@@ -65,6 +70,7 @@ int screen;
     return NO;
 }
 - (IBAction)showPicker:(id)sender {
+    groupName = grouptab.text;
     myVC = [[Contacts alloc]initWithNibName:@"Contacts" bundle:nil];
     
   [self presentViewController:myVC animated:YES completion:nil];
@@ -160,4 +166,6 @@ int screen;
     }
 }
 */
+
+
 @end

@@ -30,6 +30,8 @@
 		C5EEFD7316D853EA00EBC4ED /* Contacts.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5EEFD7116D853EA00EBC4ED /* Contacts.xib */; };
 		C5EEFD7616D95EBC00EBC4ED /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = C5EEFD7516D95EBC00EBC4ED /* Person.m */; };
 		C5EEFD7816D96C8200EBC4ED /* smiley.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C5EEFD7716D96C8200EBC4ED /* smiley.jpg */; };
+		C5EEFD7C16D9E77F00EBC4ED /* FinalCreate.m in Sources */ = {isa = PBXBuildFile; fileRef = C5EEFD7A16D9E77E00EBC4ED /* FinalCreate.m */; };
+		C5EEFD7D16D9E77F00EBC4ED /* FinalCreate.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5EEFD7B16D9E77F00EBC4ED /* FinalCreate.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +68,9 @@
 		C5EEFD7416D95EBC00EBC4ED /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
 		C5EEFD7516D95EBC00EBC4ED /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
 		C5EEFD7716D96C8200EBC4ED /* smiley.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = smiley.jpg; path = ../../../../Downloads/smiley.jpg; sourceTree = "<group>"; };
+		C5EEFD7916D9E77E00EBC4ED /* FinalCreate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinalCreate.h; sourceTree = "<group>"; };
+		C5EEFD7A16D9E77E00EBC4ED /* FinalCreate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinalCreate.m; sourceTree = "<group>"; };
+		C5EEFD7B16D9E77F00EBC4ED /* FinalCreate.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FinalCreate.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +140,9 @@
 				C5EEFD7116D853EA00EBC4ED /* Contacts.xib */,
 				C5EEFD7416D95EBC00EBC4ED /* Person.h */,
 				C5EEFD7516D95EBC00EBC4ED /* Person.m */,
+				C5EEFD7916D9E77E00EBC4ED /* FinalCreate.h */,
+				C5EEFD7A16D9E77E00EBC4ED /* FinalCreate.m */,
+				C5EEFD7B16D9E77F00EBC4ED /* FinalCreate.xib */,
 			);
 			path = "Propt-Beta";
 			sourceTree = "<group>";
@@ -216,6 +224,7 @@
 				C59BFD9616D7258300F4D818 /* NewGroup.xib in Resources */,
 				C5EEFD7316D853EA00EBC4ED /* Contacts.xib in Resources */,
 				C5EEFD7816D96C8200EBC4ED /* smiley.jpg in Resources */,
+				C5EEFD7D16D9E77F00EBC4ED /* FinalCreate.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,6 +243,7 @@
 				C59BFD9516D7258300F4D818 /* NewGroup.m in Sources */,
 				C5EEFD7216D853EA00EBC4ED /* Contacts.m in Sources */,
 				C5EEFD7616D95EBC00EBC4ED /* Person.m in Sources */,
+				C5EEFD7C16D9E77F00EBC4ED /* FinalCreate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

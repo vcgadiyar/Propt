@@ -15,9 +15,15 @@
     
     CGPoint        offset;
     Contacts *myVC;
+    NSMutableArray *names;
+    
 }
+@property (strong, nonatomic) IBOutlet UITextField *grouptab;
+
 @property (strong, nonatomic) IBOutlet UITextField *myTextfield;
 - (IBAction)showPicker:(id)sender;
 - (IBAction)backto2:(id)sender;
+@property (strong, nonatomic) IBOutlet UITableView *Populate;
+@property (nonatomic, retain)NSMutableArray *sname;
 
 @end

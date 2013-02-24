@@ -9,6 +9,9 @@
 #import "Contacts.h"
 #import "AddressBook/AddressBook.h"
 #import "Person.h"
+#import "NewGroup.h"
+#import "FinalCreate.h"
+#import "AppDelegate.h"
 
 @interface Contacts ()
 
@@ -21,8 +24,8 @@
 @synthesize allTableData;
 @synthesize filteredTableData;
 @synthesize Populate;
+//@synthesize appDelegate;
 extern int screen;
-
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -36,6 +39,8 @@ extern int screen;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     personsArray =[[NSMutableArray alloc] initWithCapacity:40];
     //Person *pdb;
     self.Populate.allowsMultipleSelection = YES;
@@ -224,14 +229,20 @@ extern int screen;
 - (IBAction)createGp:(id)sender {
     
     NSArray *selected= [Populate indexPathsForSelectedRows];
-    sname = [[NSArray alloc] init];
+    
+    names= [[NSMutableArray alloc] init];
     Person *person1 = [[Person alloc] init];
     for (NSIndexPath *path in selected) {
         NSUInteger index = [path indexAtPosition:[path length] - 1];
         NSLog(@"%lu", (unsigned long)index);
         person1 = [personsArray objectAtIndex:index];
-        [sname addObject:person1.fullName];
+        [names addObject:person1.fullName];
     }
+    myViewController = [[FinalCreate alloc]initWithNibName:@"FinalCreate" bundle:nil];
+    //myViewController.names = appDelegate.sname;
+    appDelegate.sname = names;
+    [self presentViewController:myViewController animated:YES completion:nil];
+    
     /*
     sname = [[NSArray alloc] init];
     NSUInteger i = 0;
