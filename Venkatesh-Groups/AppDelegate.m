@@ -10,17 +10,28 @@
 
 #import "ViewController.h"
 #import "FirstViewController.h"
+#import "GroupRoomViewController.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    self.viewController = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];
+   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    /* // Override point for customization after application launch.
+    self.viewController = [[ViewController alloc] initWithNibName:@"GroupViewController" bundle:nil];
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
+    return YES;*/
+    
+    //----
+    
+    GroupRoomViewController *myGroupController=[[GroupRoomViewController alloc]initWithNibName:@"GroupRoomViewController" bundle:nil];
+    self.window.rootViewController = myGroupController;
+  //  [self.window addSubview:myGroupController.view];
+    // Override point for customization after application launch.
+    [self.window makeKeyAndVisible];
     return YES;
+
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

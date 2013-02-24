@@ -22,6 +22,11 @@
 		254926BB16D461B9008D4266 /* GroupRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 254926B916D461B9008D4266 /* GroupRoomViewController.m */; };
 		254926BC16D461B9008D4266 /* GroupRoomViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 254926BA16D461B9008D4266 /* GroupRoomViewController.xib */; };
 		254926C716D47053008D4266 /* prop-question.m in Sources */ = {isa = PBXBuildFile; fileRef = 254926C616D47053008D4266 /* prop-question.m */; };
+		25E9093616D728380064E8F5 /* disclosure.png in Resources */ = {isa = PBXBuildFile; fileRef = 25E9093216D728380064E8F5 /* disclosure.png */; };
+		25E9093716D728380064E8F5 /* sectionBg.png in Resources */ = {isa = PBXBuildFile; fileRef = 25E9093316D728380064E8F5 /* sectionBg.png */; };
+		25E9093816D728380064E8F5 /* shrink.png in Resources */ = {isa = PBXBuildFile; fileRef = 25E9093416D728380064E8F5 /* shrink.png */; };
+		25E9093916D728380064E8F5 /* bar.png in Resources */ = {isa = PBXBuildFile; fileRef = 25E9093516D728380064E8F5 /* bar.png */; };
+		25E9093C16D75AEA0064E8F5 /* ProptProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 25E9093B16D75AEA0064E8F5 /* ProptProperties.m */; };
 		C53EBE4716D40A5A00364D6D /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C53EBE4516D40A5A00364D6D /* FirstViewController.m */; };
 		C53EBE4816D40A5A00364D6D /* FirstViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C53EBE4616D40A5A00364D6D /* FirstViewController.xib */; };
 /* End PBXBuildFile section */
@@ -50,6 +55,13 @@
 		254926BA16D461B9008D4266 /* GroupRoomViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GroupRoomViewController.xib; sourceTree = "<group>"; };
 		254926C516D47053008D4266 /* prop-question.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "prop-question.h"; sourceTree = "<group>"; };
 		254926C616D47053008D4266 /* prop-question.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "prop-question.m"; sourceTree = "<group>"; };
+		25E9093016D726200064E8F5 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Settings.h; path = ../Settings.h; sourceTree = "<group>"; };
+		25E9093216D728380064E8F5 /* disclosure.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = disclosure.png; sourceTree = "<group>"; };
+		25E9093316D728380064E8F5 /* sectionBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sectionBg.png; sourceTree = "<group>"; };
+		25E9093416D728380064E8F5 /* shrink.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shrink.png; sourceTree = "<group>"; };
+		25E9093516D728380064E8F5 /* bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bar.png; sourceTree = "<group>"; };
+		25E9093A16D75AEA0064E8F5 /* ProptProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProptProperties.h; sourceTree = "<group>"; };
+		25E9093B16D75AEA0064E8F5 /* ProptProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProptProperties.m; sourceTree = "<group>"; };
 		C53EBE4416D40A5A00364D6D /* FirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
 		C53EBE4516D40A5A00364D6D /* FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
 		C53EBE4616D40A5A00364D6D /* FirstViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FirstViewController.xib; sourceTree = "<group>"; };
@@ -101,18 +113,22 @@
 			children = (
 				2549268116D33A90008D4266 /* Database.h */,
 				2549268216D33A90008D4266 /* Database.m */,
+				25E9093116D7281C0064E8F5 /* Images */,
 				2549266D16D33A08008D4266 /* AppDelegate.h */,
 				2549266E16D33A08008D4266 /* AppDelegate.m */,
 				2549267616D33A08008D4266 /* ViewController.h */,
 				2549267716D33A08008D4266 /* ViewController.m */,
 				2549267916D33A08008D4266 /* ViewController.xib */,
 				2549266516D33A08008D4266 /* Supporting Files */,
+				25E9093016D726200064E8F5 /* Settings.h */,
 				C53EBE4416D40A5A00364D6D /* FirstViewController.h */,
 				C53EBE4516D40A5A00364D6D /* FirstViewController.m */,
 				C53EBE4616D40A5A00364D6D /* FirstViewController.xib */,
 				254926B816D461B9008D4266 /* GroupRoomViewController.h */,
 				254926B916D461B9008D4266 /* GroupRoomViewController.m */,
 				254926BA16D461B9008D4266 /* GroupRoomViewController.xib */,
+				25E9093A16D75AEA0064E8F5 /* ProptProperties.h */,
+				25E9093B16D75AEA0064E8F5 /* ProptProperties.m */,
 				254926C516D47053008D4266 /* prop-question.h */,
 				254926C616D47053008D4266 /* prop-question.m */,
 			);
@@ -131,6 +147,17 @@
 				2549267416D33A08008D4266 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		25E9093116D7281C0064E8F5 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				25E9093216D728380064E8F5 /* disclosure.png */,
+				25E9093316D728380064E8F5 /* sectionBg.png */,
+				25E9093416D728380064E8F5 /* shrink.png */,
+				25E9093516D728380064E8F5 /* bar.png */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -191,6 +218,10 @@
 				2549267B16D33A08008D4266 /* ViewController.xib in Resources */,
 				C53EBE4816D40A5A00364D6D /* FirstViewController.xib in Resources */,
 				254926BC16D461B9008D4266 /* GroupRoomViewController.xib in Resources */,
+				25E9093616D728380064E8F5 /* disclosure.png in Resources */,
+				25E9093716D728380064E8F5 /* sectionBg.png in Resources */,
+				25E9093816D728380064E8F5 /* shrink.png in Resources */,
+				25E9093916D728380064E8F5 /* bar.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,6 +239,7 @@
 				C53EBE4716D40A5A00364D6D /* FirstViewController.m in Sources */,
 				254926BB16D461B9008D4266 /* GroupRoomViewController.m in Sources */,
 				254926C716D47053008D4266 /* prop-question.m in Sources */,
+				25E9093C16D75AEA0064E8F5 /* ProptProperties.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
