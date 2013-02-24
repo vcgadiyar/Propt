@@ -40,6 +40,7 @@ extern int flag;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     self.navigationItem.hidesBackButton = NO;
     NSString *abc = [NSString stringWithFormat:@"Welcome %@",pname];
     [[UINavigationBar appearance] setTintColor:[UIColor blueColor]];
@@ -104,8 +105,51 @@ extern int flag;
         
     }
     cell.textLabel.text = [array objectAtIndex:indexPath.row];
+    if (flag == 0) {
+        
+        cell.imageView.image = [UIImage imageNamed:@"nfl.jpg"];
+    }
+    else if (flag == 1)
+    {
+        cell.imageView.image = [UIImage imageNamed:@"smiley.jpg"];
+    }
+    /*if (flag == 1)
+    {
+        
+    if([self.checkedIndexPath isEqual:indexPath])
+    {
+        NSMutableArray *pselected = [[NSMutableArray alloc] init];
+        [pselected addObject:cell.textLabel.text];
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }
+    else
+    {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
+    }*/
     return cell;
 }
+
+/*- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Uncheck the previous checked row
+    if(self.checkedIndexPath)
+    {
+        UITableViewCell* uncheckCell = [tableView
+                                        cellForRowAtIndexPath:self.checkedIndexPath];
+        uncheckCell.accessoryType = UITableViewCellAccessoryNone;
+    }
+    if([self.checkedIndexPath isEqual:indexPath])
+    {
+        self.checkedIndexPath = nil;
+    }
+    else
+    {
+        UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        self.checkedIndexPath = indexPath;
+    }
+    //[tableView reloadData];
+}*/
 
 
 - (IBAction)onAction: (id)sender
@@ -123,7 +167,64 @@ extern int flag;
     }
     else if (FGbar.selectedSegmentIndex == 1) {
         flag = 1;
-        [self GetGroups];
+        //[self GetGroups];
+        //[array release];
+        array = [[NSMutableArray alloc] init];
+        CFErrorRef error = NULL;
+
+        ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, &error);
+      
+        
+        
+        if (addressBook != nil)
+        {
+            
+            NSLog(@"Succesful.");
+          
+            NSArray *allContacts = (__bridge_transfer NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBook);
+          
+            NSUInteger i = 0;
+            for (i = 0; i < [allContacts count]; i++)
+            {
+                Person *person = [[Person alloc] init];
+                ABRecordRef contactPerson = (__bridge ABRecordRef)allContacts[i];
+                NSString *firstName = (__bridge_transfer NSString *)ABRecordCopyValue(contactPerson, kABPersonFirstNameProperty);
+                NSString *lastName =  (__bridge_transfer NSString *)ABRecordCopyValue(contactPerson, kABPersonLastNameProperty);
+                NSString *fullName = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
+                person.firstName = firstName;
+                person.lastName = lastName;
+                person.fullName = fullName;
+              
+                ABMultiValueRef emails = ABRecordCopyValue(contactPerson, kABPersonEmailProperty);
+               
+                NSUInteger j = 0;
+            
+                for (j = 0; j < ABMultiValueGetCount(emails); j++)
+                {
+                   
+                    NSString *email = (__bridge_transfer NSString *)ABMultiValueCopyValueAtIndex(emails, j);
+                   
+                    if (j == 0)
+                    {
+                     
+                        person.homeEmail = email;
+                       
+                        NSLog(@"person.homeEmail = %@ ", person.homeEmail);
+                       
+                    }
+                    else if (j==1)
+                        person.workEmail = email;
+
+                }
+                [array addObject:fullName];
+             //   [self.Populate addObject:person];
+              
+            }
+          
+          
+            CFRelease(addressBook);
+           
+        }
         
         
         //self.Populate.delegate = self;

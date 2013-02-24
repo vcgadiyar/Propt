@@ -8,12 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import <AddressBookUI/AddressBookUI.h>
+#import "Contacts.h"
+
 
 @interface NewGroup : UIViewController{
     
     CGPoint        offset;
+    Contacts *myVC;
 }
 @property (strong, nonatomic) IBOutlet UITextField *myTextfield;
 - (IBAction)showPicker:(id)sender;
+- (IBAction)backto2:(id)sender;
 
 @end

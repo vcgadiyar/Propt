@@ -8,17 +8,19 @@
 
 #import <UIKit/UIKit.h>
 #import "NewGroup.h"
+#import "Person.h"
 //#import "ViewController.h"
 
 @interface GroupsGames : UIViewController<UITableViewDataSource, UITableViewDelegate>
 {
-    
+    int value;
     NewGroup *myVC;
+    NSIndexPath* checkedIndexPath;
     //ViewController *pg1;
 
 }
 @property (strong, nonatomic) IBOutlet UINavigationBar *gName;
-
+@property (nonatomic, retain) NSIndexPath* checkedIndexPath;
 @property (strong, nonatomic)NewGroup *myVC;
 //@property (strong, nonatomic)ViewController *pg1;
 @property (strong, nonatomic) IBOutlet UINavigationItem *back;
@@ -30,7 +32,7 @@
 - (IBAction)createGroup:(id)sender;
 - (IBAction)goto1:(id)sender;
 
-@property NSArray *array;
+@property NSMutableArray *array;
 - (IBAction)onAction:(id)sender;
 
 @end

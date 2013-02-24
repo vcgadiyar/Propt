@@ -12,6 +12,7 @@
 
 //Player's name
 NSString *pname;
+int pno;
 extern int screen;
 
 @interface ViewController ()
@@ -23,6 +24,12 @@ extern int screen;
 {
     screen = 0;
     [super viewDidLoad];
+    int timestamp;
+    timestamp=[[NSDate date] timeIntervalSince1970];
+    
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:timestamp];
+    NSLog(@"%@", date);
+    
     //self.name.delegate = self;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
@@ -40,7 +47,10 @@ extern int screen;
 
 - (void)keyboardDidHide:(NSNotification *)note
 {
-    self.view.center = self->offset;
+    if (screen == 0) {
+        self.view.center = self->offset;
+    }
+    
     /* move your views here */
 }
 
@@ -53,8 +63,8 @@ extern int screen;
 - (void)PostMyNumber
 {
     Database * sendToDB = [[Database alloc] init];
-    NSString *myString = number.text;
-    [sendToDB postMessage:myString];
+    //NSString *myString = number.text;
+    [sendToDB postMessage:pname withno:pno];
     
     
 }
@@ -79,6 +89,7 @@ extern int screen;
 
 - (IBAction)onClick:(id)sender {
     pname= name.text;
+    pno=[number.text intValue];
     [self PostMyNumber];
     [name resignFirstResponder];
     [number resignFirstResponder];

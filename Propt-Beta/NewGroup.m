@@ -65,10 +65,20 @@ int screen;
     return NO;
 }
 - (IBAction)showPicker:(id)sender {
+    myVC = [[Contacts alloc]initWithNibName:@"Contacts" bundle:nil];
+    
+    [self.view addSubview:myVC.view];
+    
+    
+    
+}/*
     ABPeoplePickerNavigationController *picker =
     [[ABPeoplePickerNavigationController alloc] init];
     picker.peoplePickerDelegate = self;
     [self presentModalViewController:picker animated:YES];
+}
+
+- (IBAction)backto2:(id)sender {
 }
 
 
@@ -82,9 +92,9 @@ int screen;
       shouldContinueAfterSelectingPerson:(ABRecordRef)person {
     
     [self displayPerson:person];
-    [self dismissModalViewControllerAnimated:YES];
+    //[self dismissModalViewControllerAnimated:YES];
     
-    return NO;
+    return YES;
 }
 - (BOOL)peoplePickerNavigationController:
 (ABPeoplePickerNavigationController *)peoplePicker
@@ -114,4 +124,37 @@ int screen;
     CFRelease(phoneNumbers);
 }
 
+/*- (void)numberOfRowsSelected:(NSInteger)numberRows withData:(NSArray *)data andDataType:(DATA_CONTACT)type
+{
+    if (type == DATA_CONTACT_TELEPHONE)
+    {
+        for (int i = 0; i < [data count]; i++)
+        {
+            NSString *str = [data objectAtIndex:i];
+            
+            str = [str reformatTelephone];
+            
+            NSLog(@"Telephone: %@", str);
+        }
+    }
+    else if (type == DATA_CONTACT_EMAIL)
+    {
+        for (int i = 0; i < [data count]; i++)
+        {
+            NSString *str = [data objectAtIndex:i];
+            
+            NSLog(@"Emails: %@", str);
+        }
+    }
+	else
+    {
+        for (int i = 0; i < [data count]; i++)
+        {
+            NSString *str = [data objectAtIndex:i];
+            
+            NSLog(@"IDs: %@", str);
+        }
+    }
+}
+*/
 @end
