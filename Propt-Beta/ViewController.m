@@ -12,7 +12,7 @@
 
 //Player's name
 NSString *pname;
-int pno;
+NSString *pno;
 extern int screen;
 
 @interface ViewController ()
@@ -89,7 +89,7 @@ extern int screen;
 
 - (IBAction)onClick:(id)sender {
     pname= name.text;
-    pno=[number.text intValue];
+    pno = number.text;
     [self PostMyNumber];
     [name resignFirstResponder];
     [number resignFirstResponder];
