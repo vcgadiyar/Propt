@@ -20,6 +20,7 @@
 @synthesize searchBar;
 @synthesize allTableData;
 @synthesize filteredTableData;
+@synthesize Populate;
 extern int screen;
 
 
@@ -35,6 +36,8 @@ extern int screen;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    personsArray =[[NSMutableArray alloc] initWithCapacity:40];
+    //Person *pdb;
     self.Populate.allowsMultipleSelection = YES;
     screen = 4;
     isFiltered = FALSE;
@@ -72,6 +75,7 @@ extern int screen;
         NSLog(@"Succesful.");
         
         NSArray *allContacts = (__bridge_transfer NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBook);
+        //pdb = [[Person alloc] init];
         
         NSUInteger i = 0;
         for (i = 0; i < [allContacts count]; i++)
@@ -91,6 +95,7 @@ extern int screen;
             
             
             [newarray addObject:person.fullName];
+            [personsArray addObject:person];
             //   [self.Populate addObject:person];
             
         }
@@ -216,6 +221,29 @@ extern int screen;
     
      [self dismissModalViewControllerAnimated:YES];
 }*/
+- (IBAction)createGp:(id)sender {
+    
+    NSArray *selected= [Populate indexPathsForSelectedRows];
+    sname = [[NSArray alloc] init];
+    Person *person1 = [[Person alloc] init];
+    for (NSIndexPath *path in selected) {
+        NSUInteger index = [path indexAtPosition:[path length] - 1];
+        NSLog(@"%lu", (unsigned long)index);
+        person1 = [personsArray objectAtIndex:index];
+        [sname addObject:person1.fullName];
+    }
+    /*
+    sname = [[NSArray alloc] init];
+    NSUInteger i = 0;
+    for (i=0; i< selected.count; i++) {
+        Person *person1 = [[Person alloc] init];
+        person1 = [personsArray objectAtIndex:selected];
+    //= person1.fullName;
+        [sname addObject:person1.fullName];
+    }*/
+    //selected
+}
+
 - (IBAction)switchBack:(Contacts *)ctr {
     //[self dismissViewControllerAnimated:YES completion:nil];
     //[ctr.navigationController popViewControllerAnimated:YES];

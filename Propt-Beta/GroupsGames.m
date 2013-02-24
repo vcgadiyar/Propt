@@ -20,7 +20,7 @@
 extern NSString *pname;
 
 
-
+extern int screen;
 extern int flag;
 
 @synthesize gName;
@@ -40,6 +40,7 @@ extern int flag;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    screen = 1;
     
     self.navigationItem.hidesBackButton = NO;
     NSString *abc = [NSString stringWithFormat:@"Welcome %@",pname];
@@ -236,13 +237,14 @@ extern int flag;
 }
 - (IBAction)createGroup:(id)sender {
     myVC = [[NewGroup alloc]initWithNibName:@"NewGroup" bundle:nil];
-    
     [self presentViewController:myVC animated:YES completion:nil];
     
 }
 
 - (IBAction)goto1:(id)sender {
     //[self dismissModalViewControllerAnimated:YES];
+    screen = 0;
+
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

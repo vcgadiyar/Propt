@@ -11,6 +11,8 @@
 @interface Contacts : UIViewController{
     NSIndexPath* checkedIndexPath;
     boolean_t isFiltered;
+    NSMutableArray *personsArray;
+    NSMutableArray *sname;
 }
 @property (strong, nonatomic) IBOutlet UITableView *Populate;
 @property NSMutableArray *newarray;
@@ -20,6 +22,7 @@
 
 //- (IBAction)switchBack:(id)sender;
 
+- (IBAction)createGp:(id)sender;
 
 - (IBAction)switchBack:(Contacts *)ctr;
 
