@@ -18,6 +18,7 @@
 @implementation GroupsGames
 
 extern NSString *pname;
+extern NSString *pno;
 
 
 extern int screen;
@@ -41,6 +42,7 @@ extern int flag;
 {
     [super viewDidLoad];
     screen = 1;
+    [self GetUser];
     
     self.navigationItem.hidesBackButton = NO;
     NSString *abc = [NSString stringWithFormat:@"Welcome %@",pname];
@@ -67,6 +69,11 @@ extern int flag;
 - (void)GetGroups {
     Database *getFromDB = [[Database alloc]init];
     [getFromDB getMessage];
+}
+
+- (void)GetUser {
+    Database *getUserFromDB = [[Database alloc]init];
+    [getUserFromDB getUserMessage:pno];
 }
 
 

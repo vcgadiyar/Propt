@@ -19,5 +19,6 @@
 @property (strong, nonatomic) IBOutlet UITextField *gname;
 @property(nonatomic, retain)NSMutableArray *name1;
 
+- (IBAction)create_group:(id)sender;
 
 @end

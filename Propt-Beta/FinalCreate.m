@@ -5,9 +5,11 @@
 //  Created by Propt Development on 2/24/13.
 //  Copyright (c) 2013 Propt Development. All rights reserved.
 //
+//-(void) createGroup:(NSString *)gname
 
 #import "FinalCreate.h"
 //#import "AppDelegate.h"
+#import "Database.h"
 
 @interface FinalCreate ()
 
@@ -17,6 +19,7 @@
 
 //extern NSMutableArray *sname;
 extern NSString *groupName;
+extern NSString *userID;
 @synthesize gname;
 //@synthesize names;
 
@@ -67,4 +70,16 @@ extern NSString *groupName;
     return cell;
 }
 
+- (void)GroupNew
+{
+    Database * sendToDB = [[Database alloc] init];
+    //NSString *myString = number.text;
+    [sendToDB createGroup:groupName];
+    
+    
+}
+
+- (IBAction)create_group:(id)sender {
+    [self GroupNew];
+}
 @end
