@@ -14,12 +14,14 @@
 @interface FinalCreate ()
 
 @end
-
+NSInteger i;
 @implementation FinalCreate
 
 //extern NSMutableArray *sname;
 extern NSString *groupName;
 extern NSString *userID;
+extern NSString *pno;
+extern int m1;
 @synthesize gname;
 //@synthesize names;
 
@@ -35,6 +37,23 @@ extern NSString *userID;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    i=0;
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(receiveTestNotification:)
+                                                 name:@"Notification1"
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(receiveTestNotification:)
+                                                 name:@"Notification2"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(receiveTestNotification:)
+                                                 name:@"Notification3"
+                                               object:nil];
+
+
+        
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
 
     gname.text = groupName;
@@ -44,6 +63,32 @@ extern NSString *userID;
     self.Populate.dataSource = self;
     // Do any additional setup after loading the view from its nib.
 }
+
+- (void) receiveTestNotification:(NSNotification *) notification
+{
+    // [notification name] should always be @"TestNotification"
+    // unless you use this method for observation of other notifications
+    // as well.
+    
+    if ([[notification name] isEqualToString:@"Notification1"])
+         [self GroupNew];
+    else if ([[notification name] isEqualToString:@"Notification2"])
+    {
+        
+    NSString *str;
+    if (i < [appDelegate.selectedNumbers count])
+    {
+        
+        str = [appDelegate.selectedNumbers objectAtIndex:i];
+        str = [self removeUnwanted:str];
+        i++;
+        [self addGroup:str];
+        //i++;
+       
+    }
+    }
+}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -73,13 +118,42 @@ extern NSString *userID;
 - (void)GroupNew
 {
     Database * sendToDB = [[Database alloc] init];
+    
     //NSString *myString = number.text;
     [sendToDB createGroup:groupName];
+    
     
     
 }
 
 - (IBAction)create_group:(id)sender {
-    [self GroupNew];
+    
+    [self GetUser];
+    
+    
+}
+
+- (void)GetUser {
+    Database *getUserFromDB = [[Database alloc]init];
+    [getUserFromDB getUserMessage:pno];
+}
+
+
+- (void)addGroup: (NSString *)str
+{
+    Database * sendToDB = [[Database alloc] init];
+    NSString *uid = userID;
+    //uid = [self removeUnwanted:uid];
+    [sendToDB addToGroup:groupName userID:userID phoneNo:str];
+}
+
+- (NSString *)removeUnwanted:(NSString *)input
+{
+    NSString *s;
+    //input = [[NSString alloc] init];
+    NSCharacterSet *doNotWant = [NSCharacterSet characterSetWithCharactersInString:@"() "];
+    s = [[input componentsSeparatedByCharactersInSet: doNotWant] componentsJoinedByString: @""];
+    NSLog(@"%@", s);
+    return s;
 }
 @end

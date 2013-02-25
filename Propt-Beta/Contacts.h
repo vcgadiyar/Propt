@@ -14,7 +14,7 @@
 @interface Contacts : UIViewController{
     NSIndexPath* checkedIndexPath;
     boolean_t isFiltered;
-    NSMutableArray *personsArray;
+    //NSMutableArray *personsArray;
     NSMutableArray *names;
     FinalCreate *myViewController;
     AppDelegate *appDelegate;

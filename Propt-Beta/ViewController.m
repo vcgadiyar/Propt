@@ -24,6 +24,7 @@ extern int screen;
 {
     screen = 0;
     [super viewDidLoad];
+    appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     int timestamp;
     timestamp=[[NSDate date] timeIntervalSince1970];
     
@@ -79,20 +80,30 @@ extern int screen;
     return YES;
 }
 
-- (IBAction)switchView:(id)sender{
+/*- (IBAction)switchView:(id)sender{
 
     myViewController = [[GroupsGames alloc]initWithNibName:@"GroupsGames" bundle:nil];
     
     [self presentViewController:myViewController animated:YES completion:nil];
     //[navigationController pushViewController:myViewController]
-}
+}*/
 
 - (IBAction)onClick:(id)sender {
     pname= name.text;
     pno = number.text;
     [self PostMyNumber];
+    
     [name resignFirstResponder];
     [number resignFirstResponder];
+    myViewController = [[GroupsGames alloc]initWithNibName:@"GroupsGames" bundle:nil];
     
+    [self presentViewController:myViewController animated:YES completion:nil];
+
+    
+}
+
+- (void)GetUser {
+    Database *getUserFromDB = [[Database alloc]init];
+    [getUserFromDB getUserMessage:pno];
 }
 @end

@@ -16,10 +16,11 @@
     IBOutlet UITextField *name;
     CGPoint        offset;
     GroupsGames *myViewController;
+    AppDelegate *appDelegate;
 }
 - (IBAction)onClick:(id)sender;
 @property (strong, nonatomic)GroupsGames *myViewController;
-- (IBAction)switchView:(id)sender;
+//- (IBAction)switchView:(id)sender;
 
 
 @end

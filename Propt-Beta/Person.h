@@ -19,6 +19,7 @@
 
 @property (nonatomic, strong) NSString *homeEmail;
 @property (nonatomic, strong) NSString *phoneNo;
+@property (nonatomic, strong) NSString *ID;
 
 @property (nonatomic, strong) NSString *workEmail;
 

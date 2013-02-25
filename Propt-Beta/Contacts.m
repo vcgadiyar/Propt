@@ -41,7 +41,7 @@ extern int screen;
     [super viewDidLoad];
     
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    personsArray =[[NSMutableArray alloc] initWithCapacity:40];
+    appDelegate.personsArray =[[NSMutableArray alloc] initWithCapacity:40];
     //Person *pdb;
     self.Populate.allowsMultipleSelection = YES;
     screen = 4;
@@ -89,18 +89,26 @@ extern int screen;
             ABRecordRef contactPerson = (__bridge ABRecordRef)allContacts[i];
             NSString *firstName = (__bridge_transfer NSString *)ABRecordCopyValue(contactPerson, kABPersonFirstNameProperty);
             NSString *lastName =  (__bridge_transfer NSString *)ABRecordCopyValue(contactPerson, kABPersonLastNameProperty);
-            NSString *pNo =  (__bridge_transfer NSString *)ABRecordCopyValue(contactPerson, kABPersonPhoneProperty);
+           
             
             NSString *fullName = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
             person.firstName = firstName;
             person.lastName = lastName;
             person.fullName = fullName;
-            person.phoneNo = pNo;
+            //NSMutableArray *phoneNumbers = [[NSMutableArray alloc] init];
+            ABMultiValueRef multiPhones = ABRecordCopyValue(contactPerson,kABPersonPhoneProperty);
+            for(CFIndex i=0;i<ABMultiValueGetCount(multiPhones);++i) {
+                CFStringRef phoneNumberRef = ABMultiValueCopyValueAtIndex(multiPhones, i);
+                NSString *phoneNumber = (__bridge NSString *) phoneNumberRef;
+                
+                person.phoneNo = phoneNumber;
+            }
+            
             
             
             
             [newarray addObject:person.fullName];
-            [personsArray addObject:person];
+            [appDelegate.personsArray addObject:person];
             //   [self.Populate addObject:person];
             
         }
@@ -229,14 +237,20 @@ extern int screen;
 - (IBAction)createGp:(id)sender {
     
     NSArray *selected= [Populate indexPathsForSelectedRows];
-    
+    appDelegate.selectedNumbers = [[NSMutableArray alloc] init];
     names= [[NSMutableArray alloc] init];
     Person *person1 = [[Person alloc] init];
     for (NSIndexPath *path in selected) {
+        
+        
         NSUInteger index = [path indexAtPosition:[path length] - 1];
+        
+        
         NSLog(@"%lu", (unsigned long)index);
-        person1 = [personsArray objectAtIndex:index];
+        person1 = [appDelegate.personsArray objectAtIndex:index];
+        
         [names addObject:person1.fullName];
+        [appDelegate.selectedNumbers addObject:person1.phoneNo];
     }
     myViewController = [[FinalCreate alloc]initWithNibName:@"FinalCreate" bundle:nil];
     //myViewController.names = appDelegate.sname;

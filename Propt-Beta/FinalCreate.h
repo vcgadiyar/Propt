@@ -18,6 +18,7 @@
 @property (strong, nonatomic) IBOutlet UITableView *Populate;
 @property (strong, nonatomic) IBOutlet UITextField *gname;
 @property(nonatomic, retain)NSMutableArray *name1;
+- (NSString *)removeUnwanted:(NSString *)input;
 
 - (IBAction)create_group:(id)sender;
 

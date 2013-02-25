@@ -42,7 +42,7 @@ extern int flag;
 {
     [super viewDidLoad];
     screen = 1;
-    [self GetUser];
+    //[self GetUser];
     
     self.navigationItem.hidesBackButton = NO;
     NSString *abc = [NSString stringWithFormat:@"Welcome %@",pname];
