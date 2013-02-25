@@ -17,7 +17,7 @@
 @synthesize correctAnswer;
 @synthesize timer;
 @synthesize dataTime;
-
+@synthesize FirstRun;
 
 - (void) setProperties: (NSInteger) aId andOwner:(NSString *)aOwner andText:(NSString *) atext  andChoices:(NSMutableDictionary *)aChoices andCorrectAnswer:(NSString * )aCorrect andSelectedAnswer: (NSString *)aSelectedAnswer
 {
@@ -27,6 +27,7 @@
     choices = aChoices;
     correctAnswer = aCorrect;
     selectedAnswer = aSelectedAnswer;
+    FirstRun = YES;
   
 }
 

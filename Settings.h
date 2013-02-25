@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#define rowHeight 44
-#define sectionHeight 44
+#define rowHeight 25
+#define sectionHeight 57
 #define tableWidth 323
 

@@ -19,7 +19,11 @@
     NSMutableArray *cellArray;
     NSMutableArray *cellCount;
     NSMutableArray *proptQuestions;
+    Boolean choiceExpanding;
+    Boolean choiceButtonClicked;
+    Boolean firstRun;
     int counter;
+    int sectionExanded;
 }
 
 @property(strong, nonatomic)IBOutlet UITableView *MIMtableView;
@@ -35,6 +39,10 @@
 @property (nonatomic, retain) NSMutableArray *proptQuestions;
 @property (strong, nonatomic) IBOutlet UITextField *insertSectionText;
 @property (strong, nonatomic) IBOutlet UIButton *insertSection;
+
+@property (strong, nonatomic) IBOutlet UIButton *button;
+
+-(void)choiceSelected:(NSInteger) choiceIndex;
 
 
 @end

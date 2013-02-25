@@ -1,0 +1,283 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1187
+{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red0\green116\blue0;\red92\green38\blue153;\red46\green13\blue110;
+\red28\green0\blue207;\red196\green26\blue22;\red170\green13\blue145;\red63\green110\blue116;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab529
+\pard\tx529\pardeftab529\pardirnatural
+
+\f0\fs22 \cf0 \CocoaLigature0  \cf2 //View with the button to expand and shrink and\cf0 \
+    \cf2 //Label to display the Heading.\cf0 \
+    \cf3 UIView\cf0  *headerView=[[\cf3 UIView\cf0  \cf4 alloc\cf0 ]\cf4 initWithFrame\cf0 :\cf4 CGRectMake\cf0 (\cf5 0\cf0 , \cf5 0\cf0 , \cf5 323\cf0 , \cf5 44\cf0 )];\
+    \
+    \
+    \cf2 //Background Image\cf0 \
+    \cf3 UIImageView\cf0  *headerBg=[[\cf3 UIImageView\cf0  \cf4 alloc\cf0 ]\cf4 initWithImage\cf0 :[\cf3 UIImage\cf0  \cf4 imageNamed\cf0 :\cf6 @"proptbackground.png"\cf0 ]];\
+    [headerView \cf4 addSubview\cf0 :headerBg];\
+    \
+    \cf3 UIImageView\cf0  *answerBackground=[[\cf3 UIImageView\cf0  \cf4 alloc\cf0 ]\cf4 initWithImage\cf0 :[\cf3 UIImage\cf0  \cf4 imageNamed\cf0 :\cf6 @"answerBoxBackground"\cf0 ]];\
+    answerBackground.\cf3 frame\cf0  = \cf4 CGRectMake\cf0 (\cf5 0\cf0 , \cf5 7\cf0 , \cf5 30\cf0 , \cf5 30\cf0 );\
+    \
+    [headerView \cf4 addSubview\cf0 :answerBackground];\
+    \
+    \cf2 //Button\cf0 \
+    \cf3 UIButton\cf0  *button=[\cf3 UIButton\cf0  \cf4 buttonWithType\cf0 :\cf4 UIButtonTypeCustom\cf0 ];\
+    button.\cf3 frame\cf0 =\cf4 CGRectMake\cf0 (\cf5 0\cf0 , \cf5 7\cf0 , \cf5 30\cf0 , \cf5 30\cf0 );\
+    button.\cf3 tag\cf0 =section+\cf5 1\cf0 ;\
+    [button \cf4 addTarget\cf0 :\cf7 self\cf0  \cf4 action\cf0 :\cf7 @selector\cf0 (buttonClicked:) \cf4 forControlEvents\cf0 :\cf4 UIControlEventTouchUpInside\cf0 ];\
+    [button \cf4 setImage\cf0 :[\cf3 UIImage\cf0  \cf4 imageNamed\cf0 :\cf6 @"shrink.png"\cf0 ] \cf4 forState\cf0 :\cf4 UIControlStateNormal\cf0 ];\
+    [button \cf4 setImage\cf0 :[\cf3 UIImage\cf0  \cf4 imageNamed\cf0 :\cf6 @"disclosure.png"\cf0 ] \cf4 forState\cf0 :\cf4 UIControlStateSelected\cf0 ];\
+    \
+    \cf7 if\cf0 ([[\cf8 cellCount\cf0  \cf4 objectAtIndex\cf0 :section] \cf4 intValue\cf0 ]==\cf5 0\cf0 )\
+    \{\
+        button.\cf3 selected\cf0 =\cf7 YES\cf0 ;\
+    \}\
+    \cf7 else\cf0 \
+    \{\
+        button.\cf3 selected\cf0 =\cf7 NO\cf0 ;\
+    \}\
+    \
+    [headerView \cf4 addSubview\cf0 :button];\
+    \
+    \cf2 /*\
+    \
+    //Label\
+    UILabel *headerTitle=[[UILabel alloc]initWithFrame:CGRectMake(30, 7, 300, 30)];\
+    [headerTitle setBackgroundColor:[UIColor clearColor]];\
+    [headerTitle setFont:[UIFont fontWithName:@"Helvetica-Bold" size:12]];\
+    [headerTitle setTextColor:[UIColor darkGrayColor]];\
+    \
+    int x = (arc4random() % (10-0+1));\
+    [headerTitle setText:[sectionArray objectAtIndex:section]];   //[NSString stringWithFormat:@"%d", x]];\
+    [headerView addSubview:headerTitle];\
+    \
+    return  headerView;\
+    \
+  //  static NSString *CellIdentifier = @"ProptCell";\
+   // UITableViewCell *headerView = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];\
+   // if (headerView == nil)\{\
+    //    [NSException raise:@"headerView == nil.." format:@"No cells with matching CellIdentifier loaded from your storyboard"];\
+    //\}\
+   // return headerView;\
+    \
+     UIView *headerView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 323, 44)];\
+    \
+     headerView = [[UITableViewCell alloc]  initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];\
+    \
+    headerView = [tableView dequeueReusableCellWithIdentifier:@"ProptCell"];\
+    if (!headerView)\
+        headerView = [[[NSBundle mainBundle] loadNibNamed:@"switchcell" owner:self options:nil] lastObject];\
+    [(UITextView *)[headerView viewWithTag:103] setText:[NSString stringWithFormat:@"Testing... %d\\n", section]];\
+  \
+     // [(UITextView *)[headerView viewWithTag:103] setText:[NSString stringWithFormat:@"Testing... %d\\n", section]];\
+    \
+    UITextView *text = (UITextView *)[headerView viewWithTag:103];\
+   // Now you can use the label to set a new title:\
+    \
+    [text setText:[NSString stringWithFormat:@"Testing Blaaa... %d\\n", section]];\
+    \
+    \
+    //-------\
+    \
+    \
+    counter = 0;\
+    \
+    ProptProperties *temppropt = [[ProptProperties alloc] init];\
+    \
+    temppropt = [proptQuestions objectAtIndex:section];\
+    \
+    NSString *letterTransformation = [[NSString alloc] init];\
+    letterTransformation = [temppropt.selectedAnswer stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];\
+\
+    \
+    if([letterTransformation length] != 0)\
+    \{\
+    //Choice Selected\
+    UIImageView *answerboxImage = (UIImageView *)[headerView viewWithTag:106];        \
+    [answerboxImage setImage:[UIImage imageNamed:@"answeredChoiceBackground.png"]];    \
+    \
+    UILabel *answerLabel = (UILabel *)[headerView viewWithTag:100];\
+    [answerLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:12]];\
+    answerLabel.frame=CGRectMake(84, 31, 80, 27);\
+    [answerLabel setTextColor:[UIColor whiteColor]];\
+    [answerLabel setText: @"Answered"];\
+        \
+        //Clear Button\
+        \
+        //UIButton* newButton =  (UIButton *)[headerView viewWithTag:section];\
+        \
+       // if(temppropt.FirstRun == YES)\
+        \{\
+            \
+            /* UIButton *b = [[UIButton alloc] init];\
+             b=[UIButton buttonWithType:UIButtonTypeCustom];\
+             b.frame=CGRectMake(155, 31, 80, 27);\
+             b.tag=section;\
+             \
+             [b setTitle:@"Clear" forState:UIControlStateNormal ];\
+             [b setTitleColor: [UIColor blueColor] forState:UIControlStateNormal];\
+             b.titleLabel.font = [UIFont systemFontOfSize:13];\
+             \
+             [b addTarget:self action:@selector(buttonClearClicked:) forControlEvents:UIControlEventTouchUpInside];\
+             \
+             [headerView addSubview:b];\
+            \
+            temppropt.FirstRun = NO;*/\cf0 \
+       \cf2 // \}\cf0 \
+       \cf2 /* else\
+        \{\
+            [newButton setTitle:@"Clear" forState:UIControlStateNormal ];\
+        \}\
+        \
+          UIButton *mybutton = (UIButton *)[headerView viewWithTag:121];\
+        \
+        [mybutton setTitle:@"Clear111" forState:UIControlStateNormal];\
+        \
+           [mybutton addTarget:self action:@selector(buttonClearClicked:event:) forControlEvents:UIControlEventTouchUpInside];\
+        \
+        sectionExanded = section;\
+    \
+        /*\
+        UIButton *b = [[UIButton alloc] init];\
+        b=[UIButton buttonWithType:UIButtonTypeCustom];\
+        buttonClear.frame=CGRectMake(155, 31, 80, 27);\
+        buttonClear.tag=section+1;\
+        \
+        [buttonClear setTitle:@"Clear" forState:UIControlStateNormal ];\
+        [buttonClear setTitleColor: [UIColor blueColor] forState:UIControlStateNormal];\
+        buttonClear.titleLabel.font = [UIFont systemFontOfSize:13];\
+        \
+        [buttonClear addTarget:self action:@selector(buttonClearClicked:) forControlEvents:UIControlEventTouchUpInside];\
+        \
+        [headerView addSubview:buttonClear];\
+        \
+        \
+    \}\
+    else\
+    \{\
+        UIImageView *answerboxImage = (UIImageView *)[headerView viewWithTag:106];\
+        [answerboxImage setImage:[UIImage imageNamed:@"answerBoxBackground.png"]];\
+        \
+        \
+        UILabel *answerLabel = (UILabel *)[headerView viewWithTag:100];\
+        [answerLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:12]];\
+        answerLabel.frame=CGRectMake(84, 31, 80, 27);\
+        [answerLabel setTextColor:[UIColor blackColor]];\
+        [answerLabel setText: @"Predict | 0:00"];\
+       ;\
+        \
+          \
+        UIButton *mybutton = (UIButton *)[headerView viewWithTag:121];\
+        \
+        [mybutton setTitle:@"Clear222" forState:UIControlStateNormal];\
+        \
+       // [mybutton addTarget:self action:@selector(buttonClearClicked:) forControlEvents:UIControlEventTouchUpInside];\
+        \
+        [mybutton addTarget:self action:@selector(buttonClearClicked:event:) forControlEvents:UIControlEventTouchUpInside];\
+        \
+        sectionExanded = -1;\
+        \
+       // if(temppropt.FirstRun == YES)\
+        \{\
+            \
+           /* UIButton *b = [[UIButton alloc] init];\
+            b=[UIButton buttonWithType:UIButtonTypeCustom];\
+            b.frame=CGRectMake(155, 31, 80, 27);\
+            b.tag=section;\
+            \
+            [b setTitle:@"Clear" forState:UIControlStateNormal ];\
+            [b setTitleColor: [UIColor blueColor] forState:UIControlStateNormal];\
+            b.titleLabel.font = [UIFont systemFontOfSize:13];\
+            \
+            [b addTarget:self action:@selector(buttonClearClicked:) forControlEvents:UIControlEventTouchUpInside];\
+            \
+            [headerView addSubview:b];\
+            temppropt.FirstRun = NO;*/\cf0 \
+        \cf2 //\}\cf0 \
+       \cf2 /* else\
+        \{\
+            UIButton* newButton =  (UIButton *)[headerView viewWithTag:section];\
+            \
+            if(newButton == nil)\
+            \{\
+                \
+            \}\
+            else\
+            \{\
+            [newButton setTitle:@"Clear2222" forState:UIControlStateNormal ];\
+                \
+                [(UIButton *)[headerView viewWithTag:section] setTitle:@"Cleeaar222" forState:UIControlStateNormal];\
+                \
+            \}\
+        \}*/\cf0 \
+        \
+        \
+        \
+        \
+      \cf2 //  UIButton *b = (UIButton *)[headerView viewWithTag:112];\cf0 \
+        \
+       \cf2 // [b setTitle:@"Clear222222" forState:UIControlStateNormal];\cf0 \
+        \
+       \cf2 // UIButton *buttonClear2 = [[UIButton alloc] init];\cf0 \
+        \
+       \cf2 // buttonClear2 = (UIButton *)[headerView viewWithTag:110];\cf0 \
+      \cf2 //  buttonClear2.frame=CGRectMake(155, 31, 80, 27);\cf0 \
+       \cf2 // buttonClear2.tag=section+1;\cf0 \
+        \cf2 //[buttonClear2 setTitle:@" ffff" forState:UIControlStateNormal ];\cf0 \
+      \cf2 //  [buttonClear2 setTitleColor: [UIColor blueColor] forState:UIControlStateNormal];\cf0 \
+       \cf2 // buttonClear2.titleLabel.font = [UIFont systemFontOfSize:13];\cf0 \
+        \cf2 // [buttonClear2 addTarget:self action:@selector(buttonClearClicked:) forControlEvents:UIControlEventTouchUpInside];\cf0 \
+        \
+       \cf2 // [headerView addSubview:buttonClear2];\cf0 \
+               \
+        \cf2 //Clear Button\cf0 \
+       \cf2 /* buttonClear = [[UIButton alloc] init];\
+       buttonClear=[UIButton buttonWithType:UIButtonTypeCustom];\
+        buttonClear.frame=CGRectMake(155, 31, 80, 27);\
+        buttonClear.tag=section+1;\
+        \
+        [buttonClear setTitle:@"Clear" forState:UIControlStateNormal ];\
+        [buttonClear setTitleColor: [UIColor blueColor] forState:UIControlStateNormal];\
+        buttonClear.titleLabel.font = [UIFont systemFontOfSize:13];\
+        \
+        [buttonClear addTarget:self action:@selector(buttonClearClicked:) forControlEvents:UIControlEventTouchUpInside];\
+        \
+        [headerView addSubview:buttonClear];\
+      \
+    \}\
+        \
+        //Button\
+        button=[UIButton buttonWithType:UIButtonTypeCustom];\
+        button.frame=CGRectMake(70, 31, 80, 27);\
+        button.tag=section+1;\
+        [button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];\
+        \
+        [button setImage:[UIImage imageNamed:nil] forState:UIControlStateNormal];\
+        [button setImage:[UIImage imageNamed:nil] forState:UIControlStateSelected];\
+        \
+        [button setImage:[UIImage imageNamed:@"shrinkLong.png"] forState:UIControlStateNormal];\
+        [button setImage:[UIImage imageNamed:@"shrinkLong.png"] forState:UIControlStateSelected];\
+        \
+        if([[cellCount objectAtIndex:section] intValue]==0)\
+        \{\
+        button.selected=NO;\
+        \}\
+        else\
+        \{\
+        button.selected=YES;\
+        \}\
+        \
+        [headerView addSubview:button];\
+*/\cf0 \
+    \
+    \cf2 //----------\cf0 \
+    \
+    \
+        \
+    \
+    \
+\
+       \
+    \
+    \cf7 return\cf0  headerView;\
+}

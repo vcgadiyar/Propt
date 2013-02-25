@@ -19,6 +19,7 @@
     NSString *timer;
     NSString *dataTime;
     NSInteger votes;
+    Boolean FirstRun;
 
 }
 
@@ -29,6 +30,7 @@
 @property (nonatomic, retain) NSString *selectedAnswer;
 @property (nonatomic, retain) NSString *timer;
 @property (nonatomic, retain) NSString *dataTime;
+@property Boolean FirstRun;
 @property NSInteger votes;
 @property (nonatomic, retain) NSMutableDictionary *choices;
 
