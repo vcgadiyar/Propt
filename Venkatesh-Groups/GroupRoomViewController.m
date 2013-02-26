@@ -7,6 +7,7 @@
 //
 
 #import "GroupRoomViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 
 @interface GroupRoomViewController ()
@@ -22,6 +23,16 @@
 @synthesize rowText;
 @synthesize proptQuestions;
 @synthesize button;
+@synthesize myProgView;
+@synthesize myProptView;
+@synthesize toolBarAtBottom;
+@synthesize questionText;
+@synthesize answerChoice1;
+@synthesize answerChoice2;
+@synthesize answerChoice3;
+@synthesize answerChoice4;
+@synthesize answerChoice5;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,12 +48,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    
+    
     //Init the Arrays of the tableview
    // sectionArray=[[NSMutableArray alloc]initWithObjects:@"Section 1",@"Section 2",@"Section 3",@"Section 4",@"Section 5", nil];
     sectionArray=[[NSMutableArray alloc] init];
     cellArray=[[NSMutableArray alloc]init];
     cellCount=[[NSMutableArray alloc]init];
-    
+  
     proptQuestions = [[NSMutableArray alloc] init];
     ProptProperties *propts = [[ProptProperties alloc] init];
     
@@ -114,11 +127,437 @@
         [cellCount addObject:[NSNumber numberWithInt:[_cellArray count]]];
     }
     
-    [MIMtableView reloadData];*/
     
+    
+    down vote
+    Please use following code.
+    */
+    UIImageView *tempImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"mainBackground.png"]];
+    [tempImageView setFrame:self.MIMtableView.frame];
+    
+   // self.MIMtableView.backgroundView = tempImageView;
+    
+    
+    //Now need to add this UIView to a controller
+    //[self.view addSubview: viewPtr];
+    
+
+    
+    
+    
+    myProptView = (UIView *)self.CreateAPropt;
+    
+    [self.view insertSubview:myProptView belowSubview:toolBarAtBottom];
+    
+    
+    myProgView = (UIView *)self.LoadTopSectionView;
+    
+    [self.view addSubview:myProgView];
+    
+    [self.view sendSubviewToBack:myProgView];
+    
+    
+    
+    
+    [self RefreshPropts];
+       
         [super viewDidLoad];
 }
 
+-(UIView *)CreateAPropt
+{
+    
+    UIView *proptView = [[UIView alloc] initWithFrame:CGRectMake(1, 450, 320, 400)];
+    proptView.backgroundColor = [UIColor colorWithRed:(195/255.f) green:(237/255.f) blue:(255/255.f) alpha:1.0f];
+    
+    proptView.tag = 1;    // tag this view for later so we can remove it from recycled table cells
+    
+    int moveDistance = 31;
+    
+    //-----------------------------------
+    //Propt Textbox
+ 
+    
+    //Text 1
+    questionText=[[UITextView alloc]initWithFrame:CGRectMake(1, 1, 310, 49)];
+    [questionText setBackgroundColor:[UIColor whiteColor]];
+    [questionText setFont:[UIFont fontWithName:@"Arial-Bold" size:12]];
+    [questionText setTextColor:[UIColor blackColor]];
+    [questionText setText:@"Enter Propt Question"];
+    
+    [questionText setUserInteractionEnabled:YES];
+    
+    questionText.layer.borderWidth = 1.0f;
+    questionText.layer.borderColor = [[UIColor grayColor] CGColor];
+    
+    questionText.layer.cornerRadius = 6;
+    
+    questionText.delegate = self;
+    
+    [proptView addSubview:questionText];
+    
+    //-----------------------------------
+    //Propt Coice 1
+    
+    //Text 1
+     answerChoice1=[[UITextView alloc]initWithFrame:CGRectMake(1, 20 + moveDistance, 310, 25)];
+    [answerChoice1 setBackgroundColor:[UIColor whiteColor]];
+    [answerChoice1 setFont:[UIFont fontWithName:@"Arial-Bold" size:12]];
+    [answerChoice1 setTextColor:[UIColor blackColor]];
+    [answerChoice1 setText:@"Enter Choice 1"];
+    
+    [answerChoice1 setUserInteractionEnabled:YES];
+    
+    answerChoice1.layer.borderWidth = 1.0f;
+    answerChoice1.layer.borderColor = [[UIColor grayColor] CGColor];
+    
+    answerChoice1.layer.cornerRadius = 6;
+    
+    [proptView addSubview:answerChoice1];
+    
+    //-----------------------------------
+    //Propt Choice 2
+    
+    moveDistance = moveDistance + 25;
+    
+    //Text 1
+    answerChoice2=[[UITextView alloc]initWithFrame:CGRectMake(1, 20 + moveDistance, 310, 25)];
+    [answerChoice2 setBackgroundColor:[UIColor whiteColor]];
+    [answerChoice2 setFont:[UIFont fontWithName:@"Arial-Bold" size:12]];
+    [answerChoice2 setTextColor:[UIColor blackColor]];
+    [answerChoice2 setText:@"Enter Choice 2"];
+    
+    [answerChoice2 setUserInteractionEnabled:YES];
+    
+    answerChoice2.layer.borderWidth = 1.0f;
+    answerChoice2.layer.borderColor = [[UIColor grayColor] CGColor];
+    answerChoice2.layer.cornerRadius = 6;
+    
+    [proptView addSubview:answerChoice2];
+    
+    //-----------------------------------
+    //Propt Choice 3
+    
+    moveDistance = moveDistance + 25;
+    
+    //Text 1
+    answerChoice3=[[UITextView alloc]initWithFrame:CGRectMake(1, 20 + moveDistance, 310, 25)];
+    [answerChoice3 setBackgroundColor:[UIColor whiteColor]];
+    [answerChoice3 setFont:[UIFont fontWithName:@"Arial-Bold" size:11]];
+    [answerChoice3 setTextColor:[UIColor blackColor]];
+    [answerChoice3 setText:@"Enter Choice 3"];
+    
+    [answerChoice3 setUserInteractionEnabled:YES];
+    
+    answerChoice3.layer.borderWidth = 1.0f;
+    answerChoice3.layer.borderColor = [[UIColor grayColor] CGColor];
+    answerChoice3.layer.cornerRadius = 6;
+    
+    [proptView addSubview:answerChoice3];
+    
+    //-----------------------------------
+    //Propt Choice 4
+    
+    moveDistance = moveDistance + 25;
+    
+    //Text 1
+    answerChoice4=[[UITextView alloc]initWithFrame:CGRectMake(1, 20 + moveDistance, 310, 25)];
+    [answerChoice4 setBackgroundColor:[UIColor whiteColor]];
+    [answerChoice4 setFont:[UIFont fontWithName:@"Arial-Bold" size:11]];
+    [answerChoice4 setTextColor:[UIColor blackColor]];
+    [answerChoice4 setText:@"Enter Choice 4"];
+    
+    [answerChoice4 setUserInteractionEnabled:YES];
+    
+    answerChoice4.layer.borderWidth = 1.0f;
+    answerChoice4.layer.borderColor = [[UIColor grayColor] CGColor];
+    answerChoice4.layer.cornerRadius = 6;
+    
+    [proptView addSubview:answerChoice4];
+    
+    //-----------------------------------
+    //Propt Choice 5
+    
+    moveDistance = moveDistance + 25;
+    
+    //Text 1
+    answerChoice5=[[UITextView alloc]initWithFrame:CGRectMake(1, 20 + moveDistance, 310, 25)];
+    [answerChoice5 setBackgroundColor:[UIColor whiteColor]];
+    [answerChoice5 setFont:[UIFont fontWithName:@"Arial-Bold" size:11]];
+    [answerChoice5 setTextColor:[UIColor blackColor]];
+    [answerChoice5 setText:@"Enter Choice 5"];
+    
+    [answerChoice5 setUserInteractionEnabled:YES];
+    
+    answerChoice5.layer.borderWidth = 1.0f;
+    answerChoice5.layer.borderColor = [[UIColor grayColor] CGColor];
+    answerChoice5.layer.cornerRadius = 6;
+    
+    [proptView addSubview:answerChoice5];
+    
+    //--------------------------------------
+    //Button
+    UIButton *cancel=[UIButton buttonWithType:UIButtonTypeCustom];
+    cancel.frame=CGRectMake(10, 190, 56, 27);
+    
+    [cancel setTitle:@"Cancel" forState:UIControlStateNormal ];
+    [cancel setTitleColor: [UIColor blueColor] forState:UIControlStateNormal];
+    
+    [cancel.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:14]];
+    
+    
+    [cancel addTarget:self action:@selector(CancelProptClicked:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [proptView addSubview:cancel];
+    
+    //-------------------------------------
+    
+    //Button
+    UIButton *send=[UIButton buttonWithType:UIButtonTypeCustom];
+    send.frame=CGRectMake(240, 190, 56, 27);
+   
+    [send setTitle:@"Send" forState:UIControlStateNormal ];
+    [send setTitleColor: [UIColor blueColor] forState:UIControlStateNormal];
+    
+    [send.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:18]];
+    
+    
+    [send addTarget:self action:@selector(SendProptClicked:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [proptView addSubview:send];
+
+    
+    
+    
+    return proptView;
+    
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+
+    
+}
+
+
+
+-(UIView *)LoadTopSectionView
+{
+    //Background Image
+   /* UIImageView *sectionBackground=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"topSectionbackground.png"]];
+    
+    sectionBackground.frame=CGRectMake(0, 0, 323, 100);
+    
+    [topSection addSubview:sectionBackground];*/
+    
+
+     UIView *progView = [[UIView alloc] initWithFrame:CGRectMake(1, 1, 320, 63)];
+    progView.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
+    progView.tag = 1;    // tag this view for later so we can remove it from recycled table cells
+   
+    int moveDownAmount = 5;
+    
+   UIImageView *sectionBackground=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"topSectionbackground5.png"]];
+    sectionBackground.frame=CGRectMake(0, -5, 320, 85);
+    [progView addSubview:sectionBackground];
+    
+    UIImageView *mainProfileImage=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"mainProfileDefault.png"]];
+    
+    mainProfileImage.frame=CGRectMake(8, 16+moveDownAmount, 50, 50);
+    [progView addSubview:mainProfileImage];
+    
+    
+    ///=----------------------------
+   // Profile LIne
+    UIImageView *line=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"profileDivideLine.png"]];
+    [line setAlpha:0.3f];
+    
+    line.frame=CGRectMake(108, 8, 1, 55);
+    [progView addSubview:line];
+    
+    //--------------------------------------
+    //Label
+    UILabel *User=[[UILabel alloc]initWithFrame:CGRectMake(20, -5, 56, 27)];
+    [User setBackgroundColor:[UIColor clearColor]];
+    [User setFont:[UIFont fontWithName:@"Helvetica" size:11]];
+    [User setTextColor:[UIColor whiteColor]];
+    [User setText:@"User"];
+    [progView addSubview:User];
+    
+    //--------------------------------------
+    //Wins
+    UILabel *Wins=[[UILabel alloc]initWithFrame:CGRectMake(58, 9 + moveDownAmount, 56, 27)];
+    [Wins setBackgroundColor:[UIColor clearColor]];
+    [Wins setFont:[UIFont fontWithName:@"Helvetica" size:12]];
+    [Wins setTextColor:[UIColor blueColor]];
+    [Wins setText:@"34 W"];
+    [progView addSubview:Wins];
+    
+    //--------------------------------------
+    //Loss
+    UILabel *Loss=[[UILabel alloc]initWithFrame:CGRectMake(58, 25 + moveDownAmount, 56, 27)];
+    [Loss setBackgroundColor:[UIColor clearColor]];
+    [Loss setFont:[UIFont fontWithName:@"Helvetica" size:12]];
+    [Loss setTextColor:[UIColor blueColor]];
+    [Loss setText:@"14 L"];
+    [progView addSubview:Loss];
+    
+    //--------------------------------------
+    //Propts
+    UILabel *propts=[[UILabel alloc]initWithFrame:CGRectMake(58, 41+moveDownAmount, 56, 27)];
+    [propts setBackgroundColor:[UIColor clearColor]];
+    [propts setFont:[UIFont fontWithName:@"Helvetica" size:12]];
+    [propts setTextColor:[UIColor blueColor]];
+    [propts setText:@"5 Propts"];
+    [progView addSubview:propts];
+    
+    
+    //---------------------------------------------
+    //Main Room Label
+    
+    //Label
+    UILabel *mainRoomLabel=[[UILabel alloc]initWithFrame:CGRectMake(120, -14, 200, 50)];
+    [mainRoomLabel setBackgroundColor:[UIColor clearColor]];
+    [mainRoomLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:16]];
+    [mainRoomLabel setTextColor:[UIColor whiteColor]];
+    [mainRoomLabel setText:@"Blane Lakers Room"];
+    [progView addSubview:mainRoomLabel];
+    
+    //----------------------------
+    //User Score Icon
+    
+    //User Image
+    UIImageView *userImage1=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"userHeadIcon.png"]];
+    
+    [userImage1 setBackgroundColor:[UIColor lightGrayColor]];
+    userImage1.frame=CGRectMake(120, 33+moveDownAmount, 29, 26);
+    
+    [progView addSubview:userImage1];
+    
+    //Label Wins
+    UILabel *user1Wins=[[UILabel alloc]initWithFrame:CGRectMake(155, 15+moveDownAmount, 200, 50)];
+    [user1Wins setBackgroundColor:[UIColor clearColor]];
+    [user1Wins setFont:[UIFont fontWithName:@"Helvetica" size:10]];
+    [user1Wins setTextColor:[UIColor blueColor]];
+    [user1Wins setText:@"23 W"];
+    [progView addSubview:user1Wins];
+    
+    //Label Losses
+    UILabel *user1Losses=[[UILabel alloc]initWithFrame:CGRectMake(155, 27+moveDownAmount, 200, 50)];
+    [user1Losses setBackgroundColor:[UIColor clearColor]];
+    [user1Losses setFont:[UIFont fontWithName:@"Helvetica" size:10]];
+    [user1Losses setTextColor:[UIColor blueColor]];
+    [user1Losses setText:@"8 L"];
+    [progView addSubview:user1Losses];
+    
+    //Label user1Name
+    UILabel *user1Name=[[UILabel alloc]initWithFrame:CGRectMake(125, 0+moveDownAmount, 200, 50)];
+    [user1Name setBackgroundColor:[UIColor clearColor]];
+    [user1Name setFont:[UIFont fontWithName:@"Helvetica" size:10]];
+    [user1Name setTextColor:[UIColor blackColor]];
+    [user1Name setText:@"Mike"];
+    [progView addSubview:user1Name];
+    
+    //----------------------------
+    //User Score Icon
+    
+    int moveRightAmount = 67;
+    
+    //User Image
+     userImage1=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"userHeadIcon.png"]];
+    
+    [userImage1 setBackgroundColor:[UIColor lightGrayColor]];
+    userImage1.frame=CGRectMake(120 + moveRightAmount, 33+moveDownAmount, 29, 26);
+    
+    [progView addSubview:userImage1];
+    
+    //Label Wins
+    user1Wins=[[UILabel alloc]initWithFrame:CGRectMake(155 + moveRightAmount, 15+moveDownAmount, 200, 50)];
+    [user1Wins setBackgroundColor:[UIColor clearColor]];
+    [user1Wins setFont:[UIFont fontWithName:@"Helvetica" size:10]];
+    [user1Wins setTextColor:[UIColor blueColor]];
+    [user1Wins setText:@"7 W"];
+    [progView addSubview:user1Wins];
+    
+    //Label Losses
+    user1Losses=[[UILabel alloc]initWithFrame:CGRectMake(155 + moveRightAmount, 27+moveDownAmount, 200, 50)];
+    [user1Losses setBackgroundColor:[UIColor clearColor]];
+    [user1Losses setFont:[UIFont fontWithName:@"Helvetica" size:10]];
+    [user1Losses setTextColor:[UIColor blueColor]];
+    [user1Losses setText:@"1 L"];
+    [progView addSubview:user1Losses];
+    
+    //Label user1Name
+    user1Name=[[UILabel alloc]initWithFrame:CGRectMake(125 + moveRightAmount, 0+moveDownAmount, 200, 50)];
+    [user1Name setBackgroundColor:[UIColor clearColor]];
+    [user1Name setFont:[UIFont fontWithName:@"Helvetica" size:10]];
+    [user1Name setTextColor:[UIColor blackColor]];
+    [user1Name setText:@"Andrea"];
+    [progView addSubview:user1Name];
+    
+    //----------------------------
+    //User Score Icon
+    
+    moveRightAmount = moveRightAmount + 60;
+    
+    //User Image
+    userImage1=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"userHeadIcon.png"]];
+    
+    [userImage1 setBackgroundColor:[UIColor lightGrayColor]];
+    userImage1.frame=CGRectMake(120 + moveRightAmount, 33+moveDownAmount, 29, 26);
+    
+    [progView addSubview:userImage1];
+    
+    //Label Wins
+    user1Wins=[[UILabel alloc]initWithFrame:CGRectMake(155 + moveRightAmount, 15+moveDownAmount, 200, 50)];
+    [user1Wins setBackgroundColor:[UIColor clearColor]];
+    [user1Wins setFont:[UIFont fontWithName:@"Helvetica" size:10]];
+    [user1Wins setTextColor:[UIColor blueColor]];
+    [user1Wins setText:@"87 W"];
+    [progView addSubview:user1Wins];
+    
+    //Label Losses
+    user1Losses=[[UILabel alloc]initWithFrame:CGRectMake(155 + moveRightAmount, 27+moveDownAmount, 200, 50)];
+    [user1Losses setBackgroundColor:[UIColor clearColor]];
+    [user1Losses setFont:[UIFont fontWithName:@"Helvetica" size:10]];
+    [user1Losses setTextColor:[UIColor blueColor]];
+    [user1Losses setText:@"75 L"];
+    [progView addSubview:user1Losses];
+    
+    //Label user1Name
+    user1Name=[[UILabel alloc]initWithFrame:CGRectMake(125 + moveRightAmount, 0+moveDownAmount, 200, 50)];
+    [user1Name setBackgroundColor:[UIColor clearColor]];
+    [user1Name setFont:[UIFont fontWithName:@"Helvetica" size:10]];
+    [user1Name setTextColor:[UIColor blackColor]];
+    [user1Name setText:@"Saramha"];
+    [progView addSubview:user1Name];
+    
+
+    
+    
+    //-----------------------------------------
+    
+    
+   /* UILabel *activityLabel = [[UILabel alloc] init];
+    activityLabel.text = NSLocalizedString(@"BBBB..", @"string1");
+    activityLabel.backgroundColor = [UIColor grayColor];
+    activityLabel.textColor = [UIColor whiteColor];
+    activityLabel.font = [UIFont systemFontOfSize:14];
+    [progView addSubview:activityLabel];
+    activityLabel.frame = CGRectMake(5, 2, 70, 25);
+    
+    UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    [activityIndicator startAnimating];
+    [progView addSubview:activityIndicator];
+    activityIndicator.frame = CGRectMake(70, 5, 20, 20);*/
+    
+    return progView;
+}
+
+-(void)textField1Active
+{
+    
+}
 
 -(void) RefreshPropts
 {
@@ -129,7 +568,7 @@
         
          int row = [sectionArray count]-1;
         
-        NSMutableArray *_cellArray=[[NSMutableArray alloc]initWithObjects:[[item choices] objectForKey:@"a"],[[item choices] objectForKey:@"b"], [[item choices] objectForKey:@"c"], nil];
+        NSMutableArray *_cellArray=[[NSMutableArray alloc]initWithObjects:[[item choices] objectForKey:@"a"],[[item choices] objectForKey:@"b"], [[item choices] objectForKey:@"c"], [[item choices] objectForKey:@"d"], [[item choices] objectForKey:@"e"], nil];
      
         [cellArray addObject:_cellArray];
         
@@ -138,8 +577,12 @@
         [cellCount addObject:  [NSNumber numberWithInt:cellArrayCount]];
     }
 
-    [MIMtableView reloadData];
+    //[MIMtableView reloadData];
     
+    for(int i=0;i< [sectionArray count];i++)
+    {
+        [self choiceSelected:i];
+    }
 }
 - (void)AddPropt
 {    
@@ -216,6 +659,7 @@
 {
     return UITableViewCellEditingStyleNone;
 }
+
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
@@ -390,6 +834,10 @@
         clear.frame=CGRectMake(174, 35, 49, 20);
         clear.tag=section+1;
         [clear setTitle:@"Clear" forState:UIControlStateNormal ];
+        [clear setTitleColor: [UIColor blueColor] forState:UIControlStateNormal];
+        clear.titleLabel.font = [UIFont systemFontOfSize:13];
+        
+        
         [clear addTarget:self action:@selector(buttonClearClicked:) forControlEvents:UIControlEventTouchUpInside];
         
         [headerView addSubview:clear];
@@ -402,6 +850,8 @@
         clear.frame=CGRectMake(174, 35, 49, 20);
         clear.tag=section+1;
         [clear setTitle:@" " forState:UIControlStateNormal ];
+        [clear setTitleColor: [UIColor blueColor] forState:UIControlStateNormal];
+        clear.titleLabel.font = [UIFont systemFontOfSize:13];
         
         [clear addTarget:self action:@selector(buttonClearClicked:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -459,7 +909,11 @@
 
 -(IBAction)buttonClicked:(id)sender
 {
-   
+    for(int i=0;i< [sectionArray count];i++)
+    {
+        [self choiceSelected:i];
+    }
+    
     UIButton *button=(UIButton *)sender;
     NSInteger _index=[sender tag]-1;
     choiceButtonClicked = YES;
@@ -497,7 +951,7 @@
                 
        
         
-            [MIMtableView reloadSections:[NSIndexSet indexSetWithIndex:_index]  withRowAnimation:UITableViewRowAnimationAutomatic];
+            [MIMtableView reloadSections:[NSIndexSet indexSetWithIndex:_index]  withRowAnimation:UITableViewRowAnimationFade];
         
         ProptProperties *temppropt = [[ProptProperties alloc] init];
          
@@ -682,10 +1136,10 @@
     //Add the Bg Image to the cell
     
     //Add the Label
-    UILabel *cellTitle=[[UILabel alloc]initWithFrame:CGRectMake(0, -10, 300, 30)];
-    [cellTitle setBackgroundColor:[UIColor clearColor]];
+    UILabel *cellTitle=[[UILabel alloc]initWithFrame:CGRectMake(0, -10, 330, 30)];
+    [cellTitle setBackgroundColor:[UIColor colorWithRed:(183/255.f) green:(209/255.f) blue:(255/255.f) alpha:1.0f]];
     [cellTitle setFont:[UIFont fontWithName:@"Helvetica-Bold" size:12]];
-    [cellTitle setTextColor:[UIColor darkGrayColor]];
+    [cellTitle setTextColor:[UIColor blackColor]];
     
     NSInteger section = indexPath.section;
     [cellTitle setText:[[cellArray objectAtIndex:section] objectAtIndex:indexPath.row]];
@@ -734,6 +1188,14 @@
     
 }
 
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert" message:@"Alert Message" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
+    [alert show];
+    
+    return YES;
+}
+
 
 
 - (void)didReceiveMemoryWarning
@@ -745,6 +1207,37 @@
 - (IBAction)addrowpress:(id)sender {
 }
 
+- (IBAction)SendProptClicked:(id)sender {
+    
+    
+    
+    
+     [self.view endEditing:TRUE];
+}
+
+- (IBAction)CancelProptClicked:(id)sender {
+    
+    
+    [self HidePropt];
+    
+}
+
+-(void)HidePropt
+{
+    [UIView beginAnimations:@"UIBase Hide" context:nil];
+    
+    [UIView setAnimationDuration:.5];
+    [UIView setAnimationCurve: UIViewAnimationCurveEaseInOut];
+    [UIView setAnimationDelegate:self];
+    [UIView setAnimationDidStopSelector:@selector(MoveDidStop:finished:context:)];
+    
+    myProptView.frame = CGRectMake(1, 450, 320, 400);
+    
+    firstRun = NO;
+    
+    [UIView commitAnimations];
+}
+
 - (IBAction)insertSectionPressed:(id)sender {
    
     [button sendActionsForControlEvents: UIControlEventTouchUpInside];
@@ -753,8 +1246,52 @@
 
 - (IBAction)addrowPressed:(id)sender {
     
-    [self RefreshPropts];
+
+    
+      [UIView beginAnimations:@"UIBase Hide" context:nil];
+  
+    
+    if(firstRun == YES)
+    {
+  
+     //   [questionText becomeFirstResponder];
+    
+    [UIView setAnimationDuration:.5];
+    [UIView setAnimationCurve: UIViewAnimationCurveEaseInOut];
+        [UIView setAnimationDelegate:self];
+        [UIView setAnimationDidStopSelector:@selector(MoveDidStop:finished:context:)];
+        
+    myProptView.frame = CGRectMake(1, 450, 320, 400);
+        
+        firstRun = NO;
+    }
+    else
+    {
+        [questionText becomeFirstResponder];
+        
+        [UIView setAnimationDuration:.5];
+        [UIView setAnimationCurve: UIViewAnimationCurveEaseInOut];
+        [UIView setAnimationDelegate:self];
+        [UIView setAnimationDidStopSelector:@selector(MoveDidStop:finished:context:)];
+        
+        myProptView.frame = CGRectMake(1, 20, 320, 400);
+        
+        firstRun = YES;
+        
+    }
+    [UIView commitAnimations];
+    
+   
 }
+
+- (void)MoveDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
+{
+    if (firstRun == NO) {
+        [self.view endEditing:TRUE];
+    }
+   
+}
+
 
 - (IBAction)addsectionpress:(id)sender {
     
@@ -765,4 +1302,46 @@
     
     
 }
+- (IBAction)uibarbuttonClicked:(id)sender {
+    
+    
+    [UIView beginAnimations:@"UIBase Hide" context:nil];
+    
+    
+   // if(firstRun == YES)
+    {
+        [questionText becomeFirstResponder];
+        
+        [UIView setAnimationDuration:.5];
+        [UIView setAnimationCurve: UIViewAnimationCurveEaseInOut];
+        [UIView setAnimationDelegate:self];
+        [UIView setAnimationDidStopSelector:@selector(MoveDidStop:finished:context:)];
+        
+        myProptView.frame = CGRectMake(1, 20, 320, 400);
+        
+        firstRun = YES;
+        
+    }
+   /* else
+    {
+        //   [questionText becomeFirstResponder];
+        
+        [UIView setAnimationDuration:.5];
+        [UIView setAnimationCurve: UIViewAnimationCurveEaseInOut];
+        [UIView setAnimationDelegate:self];
+        [UIView setAnimationDidStopSelector:@selector(MoveDidStop:finished:context:)];
+        
+        myProptView.frame = CGRectMake(1, 450, 320, 400);
+        
+        firstRun = NO;
+        
+       
+        
+    }*/
+    [UIView commitAnimations];
+    
+    
+}
+
+
 @end

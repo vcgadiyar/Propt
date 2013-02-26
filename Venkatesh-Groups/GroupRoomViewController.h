@@ -32,7 +32,8 @@
 - (IBAction)addrowpress:(id)sender;
 - (IBAction)insertSectionPressed:(id)sender;
 - (IBAction)addrowPressed:(id)sender;
-
+@property (strong, nonatomic) IBOutlet UIView *myProgView;
+@property (strong, nonatomic) IBOutlet UIView *myProptView;
 
 @property (strong, nonatomic) IBOutlet UITextField *sectionText;
 @property (strong, nonatomic) IBOutlet UITextField *rowText;
@@ -41,8 +42,17 @@
 @property (strong, nonatomic) IBOutlet UIButton *insertSection;
 
 @property (strong, nonatomic) IBOutlet UIButton *button;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *addproptbarbutton;
+@property (strong, nonatomic) IBOutlet UIToolbar *toolBarAtBottom;
 
--(void)choiceSelected:(NSInteger) choiceIndex;
+@property (strong, nonatomic) IBOutlet UITextView *questionText;
+@property (strong, nonatomic) IBOutlet UITextView *answerChoice1;
+@property (strong, nonatomic) IBOutlet UITextView *answerChoice2;
+@property (strong, nonatomic) IBOutlet UITextView *answerChoice3;
+@property (strong, nonatomic) IBOutlet UITextView *answerChoice4;
+@property (strong, nonatomic) IBOutlet UITextView *answerChoice5;
+
+
 
 
 @end
