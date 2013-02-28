@@ -23,6 +23,7 @@
 		252DACCA16DC2D020084CF52 /* topSectionbackground3.png in Resources */ = {isa = PBXBuildFile; fileRef = 252DACC916DC2D020084CF52 /* topSectionbackground3.png */; };
 		252DACCC16DC2DDB0084CF52 /* topSectionbackground4.png in Resources */ = {isa = PBXBuildFile; fileRef = 252DACCB16DC2DDB0084CF52 /* topSectionbackground4.png */; };
 		252DACCE16DC2E290084CF52 /* topSectionbackground5.png in Resources */ = {isa = PBXBuildFile; fileRef = 252DACCD16DC2E290084CF52 /* topSectionbackground5.png */; };
+		25349F4616DEFB1D00E3A7AB /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25349F4516DEFB1D00E3A7AB /* SystemConfiguration.framework */; };
 		2549265F16D33A07008D4266 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2549265E16D33A07008D4266 /* UIKit.framework */; };
 		2549266116D33A07008D4266 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2549266016D33A07008D4266 /* Foundation.framework */; };
 		2549266316D33A07008D4266 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2549266216D33A07008D4266 /* CoreGraphics.framework */; };
@@ -66,6 +67,7 @@
 		252DACC916DC2D020084CF52 /* topSectionbackground3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topSectionbackground3.png; sourceTree = "<group>"; };
 		252DACCB16DC2DDB0084CF52 /* topSectionbackground4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topSectionbackground4.png; sourceTree = "<group>"; };
 		252DACCD16DC2E290084CF52 /* topSectionbackground5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topSectionbackground5.png; sourceTree = "<group>"; };
+		25349F4516DEFB1D00E3A7AB /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		2549265A16D33A07008D4266 /* Venkatesh-Groups.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Venkatesh-Groups.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2549265E16D33A07008D4266 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2549266016D33A07008D4266 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -108,6 +110,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25349F4616DEFB1D00E3A7AB /* SystemConfiguration.framework in Frameworks */,
 				2549265F16D33A07008D4266 /* UIKit.framework in Frameworks */,
 				2549266116D33A07008D4266 /* Foundation.framework in Frameworks */,
 				2549266316D33A07008D4266 /* CoreGraphics.framework in Frameworks */,
@@ -120,6 +123,7 @@
 		2549264F16D33A07008D4266 = {
 			isa = PBXGroup;
 			children = (
+				25349F4516DEFB1D00E3A7AB /* SystemConfiguration.framework */,
 				2549266416D33A07008D4266 /* Venkatesh-Groups */,
 				2549265D16D33A07008D4266 /* Frameworks */,
 				2549265B16D33A07008D4266 /* Products */,

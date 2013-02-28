@@ -11,6 +11,12 @@
 @interface ProptProperties : NSObject
 {
     NSInteger Id;
+    
+    NSInteger groupId;
+    NSInteger posterId;
+    NSString *startTime;
+    NSString *endTime;
+    
     NSString *text;
     NSString *owner;
     NSMutableDictionary *choices;
@@ -20,10 +26,17 @@
     NSString *dataTime;
     NSInteger votes;
     Boolean FirstRun;
+    Boolean Imported;
 
 }
 
 @property NSInteger Id;
+
+@property NSInteger groupId;
+@property NSInteger posterId;
+@property (nonatomic, retain) NSString *startTime;
+@property (nonatomic, retain) NSString *endTime;
+
 @property (nonatomic, retain) NSString *text;
 @property (nonatomic, retain) NSString *owner;
 @property (nonatomic, retain) NSString *correctAnswer;
@@ -31,11 +44,12 @@
 @property (nonatomic, retain) NSString *timer;
 @property (nonatomic, retain) NSString *dataTime;
 @property Boolean FirstRun;
+@property Boolean Imported;
 @property NSInteger votes;
 @property (nonatomic, retain) NSMutableDictionary *choices;
 
 
-- (void) setProperties: (NSInteger) aId andOwner:(NSString *)aOwner andText:(NSString *) atext  andChoices:(NSMutableDictionary *)aChoices andCorrectAnswer:(NSString * )aCorrect andSelectedAnswer: (NSString *)aSelectedAnswer;
+- (void) setProperties: (NSInteger) aId andGroupID: (NSInteger)agroupId andPosterID: (NSInteger) aposterId andStartTime:(NSString *)astartTime andEndTime:(NSString *)aendTime  andOwner:(NSString *)aOwner andText:(NSString *) atext  andChoices:(NSMutableDictionary *)aChoices andCorrectAnswer:(NSString * )aCorrect andSelectedAnswer: (NSString *)aSelectedAnswer;
 
 
 @end

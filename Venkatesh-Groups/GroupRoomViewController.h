@@ -10,7 +10,30 @@
 #import "Settings.h"
 #import "ProptProperties.h"
 
-@interface GroupRoomViewController : UIViewController<UITableViewDelegate,UITableViewDataSource> {
+#define kGetAllPropts @"http://www.courseeker.com/Propt/Scripts/Propt_Scripts.php?function=getAllPropts"
+#define kGetProptsAfterTime @"http://courseeker.com/Propt/Scripts/Propt_Scripts.php?function=getProptsAfterGivenTimestamp&timestamp="
+
+#define kGetInsertPropt @"http://www.courseeker.com/Propt/Scripts/Propt_Scripts.php?function=insertPropt"
+
+#define kDeleteAllPropts @"http://www.courseeker.com/Propt/Scripts/Propt_Scripts.php?function=deleteAllPropts"
+
+
+/*http://courseeker.com/Propt/Scripts/Propt_Scripts.php?function=insertPropt&group_id=432&propt_text=Why%20is%20this%20happening?&a=who&b=why&correct=Lebron&poster_id=423&start_time=4234&end_time=543*/
+
+
+#define propt_text @"propt_text"
+#define group_id @"group_id"
+#define aOption @"a"
+#define bOption @"b"
+#define cOption @"c"
+#define dOption @"d"
+#define eOption @"e"
+#define poster_id @"poster_id"
+#define start_time @"start_time"
+#define end_time @"end_time"
+
+
+@interface GroupRoomViewController : UIViewController<UITableViewDelegate,UITableViewDataSource, UITextViewDelegate> {
     
         IBOutlet UITableView *MIMtableView;
     
@@ -22,8 +45,23 @@
     Boolean choiceExpanding;
     Boolean choiceButtonClicked;
     Boolean firstRun;
+    Boolean processingdata;
     int counter;
     int sectionExanded;
+     NSDictionary *json;
+    int lastTimestampFromDatadase;
+    int choiceCount;
+    UILabel *mainRoomLabel;
+    
+    Boolean createProptTextShowing;
+    Boolean questionStartedText;
+    Boolean choice1StartedText;
+    Boolean choice2StartedText;
+    Boolean choice3StartedText;
+    Boolean choice4StartedText;
+    Boolean choice5StartedText;
+    
+    Boolean initializing;
 }
 
 @property(strong, nonatomic)IBOutlet UITableView *MIMtableView;
@@ -43,7 +81,12 @@
 
 @property (strong, nonatomic) IBOutlet UIButton *button;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *addproptbarbutton;
+
 @property (strong, nonatomic) IBOutlet UIToolbar *toolBarAtBottom;
+
+@property (strong, nonatomic) IBOutlet UIButton *addchoice;
+
+@property (strong, nonatomic) IBOutlet UIButton *deletechoice;
 
 @property (strong, nonatomic) IBOutlet UITextView *questionText;
 @property (strong, nonatomic) IBOutlet UITextView *answerChoice1;
@@ -52,7 +95,17 @@
 @property (strong, nonatomic) IBOutlet UITextView *answerChoice4;
 @property (strong, nonatomic) IBOutlet UITextView *answerChoice5;
 
+@property (strong, nonatomic) IBOutlet UILabel *mainRoomLabel;
 
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *leavegroupbarbutton;
+
+- (IBAction)leavegroupbarbutton:(id)sender;
+
+@property (strong, nonatomic) NSURLConnection *postConnection;
+
+- (IBAction)newbutton:(id)sender;
+
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *grouplistButton;
 
 
 @end

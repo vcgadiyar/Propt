@@ -49,11 +49,11 @@
 						<string key="NSFrame">{{0, 81}, {320, 340}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
+						<reference key="NSNextKeyView" ref="848260258"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC43MzE3Mjk5NjUxIDAuODk5ODkzMTcxNyAxAA</bytes>
+							<bytes key="NSRGB">MC41NTY0OTk1MTYyIDAuNzIyNjU5NTgzIDAuOTI1OTIwNzU4OQA</bytes>
 						</object>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">1</int>
@@ -77,17 +77,26 @@
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<array class="NSMutableArray" key="IBUIItems">
-							<object class="IBUIBarButtonItem" id="677029429">
-								<string key="IBUITitle">Add propt</string>
+							<object class="IBUIBarButtonItem" id="460779523">
+								<string key="IBUITitle">&lt; Group List</string>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<float key="IBUIWidth">150</float>
 								<int key="IBUIStyle">1</int>
 								<reference key="IBUIToolbar" ref="848260258"/>
 							</object>
-							<object class="IBUIBarButtonItem" id="460779523">
+							<object class="IBUIBarButtonItem" id="677029429">
+								<string key="IBUITitle"> + Add Propt</string>
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+								<float key="IBUIWidth">93</float>
+								<int key="IBUIStyle">1</int>
+								<reference key="IBUIToolbar" ref="848260258"/>
+								<object class="NSColor" key="IBUITintColor">
+									<int key="NSColorSpace">1</int>
+									<bytes key="NSRGB">MC4xMzU2MzkxODI5IDAuNDk4ODA0MjA5MiAwLjE2MDk3NjczNzYAA</bytes>
+								</object>
+							</object>
+							<object class="IBUIBarButtonItem" id="1052831896">
 								<string key="IBUITitle">Leave Group</string>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<float key="IBUIWidth">146</float>
 								<int key="IBUIStyle">1</int>
 								<reference key="IBUIToolbar" ref="848260258"/>
 							</object>
@@ -99,11 +108,8 @@
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="633277454"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
-					<int key="NSColorSpace">3</int>
-					<bytes key="NSWhite">MQA</bytes>
-					<object class="NSColorSpace" key="NSCustomColorSpace">
-						<int key="NSID">2</int>
-					</object>
+					<int key="NSColorSpace">1</int>
+					<bytes key="NSRGB">MC42MzA0MzgxMzk0IDAuODU3NTA2NjA3MiAxAA</bytes>
 				</object>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
 				<object class="IBUIScreenMetrics" key="IBUISimulatedDestinationMetrics">
@@ -484,12 +490,36 @@
 					<int key="connectionID">1569</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">leavegroupbarbutton</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="1052831896"/>
+					</object>
+					<int key="connectionID">1591</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">grouplistButton</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="460779523"/>
+					</object>
+					<int key="connectionID">1594</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">uibarbuttonClicked:</string>
+						<string key="label">groupListPressed:</string>
 						<reference key="source" ref="677029429"/>
+						<reference key="destination" ref="372490531"/>
+					</object>
+					<int key="connectionID">1593</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">newbutton:</string>
+						<reference key="source" ref="460779523"/>
 						<reference key="destination" ref="975951072"/>
 					</object>
-					<int key="connectionID">1473</int>
+					<int key="connectionID">1595</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -538,6 +568,14 @@
 						<reference key="destination" ref="372490531"/>
 					</object>
 					<int key="connectionID">242</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">leavegroupbarbutton:</string>
+						<reference key="source" ref="1052831896"/>
+						<reference key="destination" ref="372490531"/>
+					</object>
+					<int key="connectionID">1592</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -600,7 +638,7 @@
 								<float key="scoringTypeFloat">29</float>
 								<int key="contentType">3</int>
 							</object>
-							<object class="IBNSLayoutConstraint" id="384600320">
+							<object class="IBNSLayoutConstraint" id="576299510">
 								<reference key="firstItem" ref="633277454"/>
 								<int key="firstAttribute">3</int>
 								<int key="relation">0</int>
@@ -648,8 +686,8 @@
 								<float key="scoringTypeFloat">29</float>
 								<int key="contentType">3</int>
 							</object>
-							<reference ref="848260258"/>
 							<reference ref="633277454"/>
+							<reference ref="848260258"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -668,19 +706,10 @@
 						<int key="objectID">10</int>
 						<reference key="object" ref="848260258"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="677029429"/>
 							<reference ref="460779523"/>
+							<reference ref="677029429"/>
+							<reference ref="1052831896"/>
 						</array>
-						<reference key="parent" ref="191373211"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">14</int>
-						<reference key="object" ref="46170335"/>
-						<reference key="parent" ref="191373211"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">13</int>
-						<reference key="object" ref="767986283"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -1946,7 +1975,22 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">1467</int>
-						<reference key="object" ref="384600320"/>
+						<reference key="object" ref="576299510"/>
+						<reference key="parent" ref="191373211"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">1588</int>
+						<reference key="object" ref="1052831896"/>
+						<reference key="parent" ref="848260258"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">13</int>
+						<reference key="object" ref="767986283"/>
+						<reference key="parent" ref="191373211"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">14</int>
+						<reference key="object" ref="46170335"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 				</array>
@@ -1960,7 +2004,7 @@
 				<array class="NSMutableArray" key="1.IBViewMetadataConstraints">
 					<reference ref="135694608"/>
 					<reference ref="444183454"/>
-					<reference ref="384600320"/>
+					<reference ref="576299510"/>
 					<reference ref="669125751"/>
 					<reference ref="767986283"/>
 					<reference ref="46170335"/>
@@ -2020,6 +2064,7 @@
 				<string key="1330.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="14.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="1467.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="1588.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="215.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<array class="NSMutableArray" key="215.IBViewMetadataConstraints">
 					<reference ref="948907078"/>
@@ -2146,7 +2191,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">1571</int>
+			<int key="maxID">1595</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2154,19 +2199,32 @@
 					<string key="className">GroupRoomViewController</string>
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="AddProptOptionClicked:">id</string>
 						<string key="CancelProptClicked:">id</string>
+						<string key="DeleteProptOptionClicked:">id</string>
 						<string key="SendProptClicked:">id</string>
 						<string key="addrowPressed:">id</string>
 						<string key="addrowpress:">id</string>
 						<string key="addsectionpress:">id</string>
 						<string key="buttonClearClicked:">id</string>
 						<string key="buttonClicked:">id</string>
+						<string key="groupListPressed:">id</string>
 						<string key="insertSectionPressed:">id</string>
+						<string key="leavegroupbarbutton:">id</string>
+						<string key="newbutton:">id</string>
 						<string key="uibarbuttonClicked:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="AddProptOptionClicked:">
+							<string key="name">AddProptOptionClicked:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="CancelProptClicked:">
 							<string key="name">CancelProptClicked:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="DeleteProptOptionClicked:">
+							<string key="name">DeleteProptOptionClicked:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="SendProptClicked:">
@@ -2193,8 +2251,20 @@
 							<string key="name">buttonClicked:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="groupListPressed:">
+							<string key="name">groupListPressed:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="insertSectionPressed:">
 							<string key="name">insertSectionPressed:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="leavegroupbarbutton:">
+							<string key="name">leavegroupbarbutton:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="newbutton:">
+							<string key="name">newbutton:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="uibarbuttonClicked:">
@@ -2204,6 +2274,7 @@
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="MIMtableView">UITableView</string>
+						<string key="addchoice">UIButton</string>
 						<string key="addproptbarbutton">UIBarButtonItem</string>
 						<string key="addrow">UIButton</string>
 						<string key="addsection">UIButton</string>
@@ -2213,8 +2284,12 @@
 						<string key="answerChoice4">UITextView</string>
 						<string key="answerChoice5">UITextView</string>
 						<string key="button">UIButton</string>
+						<string key="deletechoice">UIButton</string>
+						<string key="grouplistButton">UIBarButtonItem</string>
 						<string key="insertSection">UIButton</string>
 						<string key="insertSectionText">UITextField</string>
+						<string key="leavegroupbarbutton">UIBarButtonItem</string>
+						<string key="mainRoomLabel">UILabel</string>
 						<string key="myProgView">UIView</string>
 						<string key="myProptView">UIView</string>
 						<string key="questionText">UITextView</string>
@@ -2226,6 +2301,10 @@
 						<object class="IBToOneOutletInfo" key="MIMtableView">
 							<string key="name">MIMtableView</string>
 							<string key="candidateClassName">UITableView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="addchoice">
+							<string key="name">addchoice</string>
+							<string key="candidateClassName">UIButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="addproptbarbutton">
 							<string key="name">addproptbarbutton</string>
@@ -2263,6 +2342,14 @@
 							<string key="name">button</string>
 							<string key="candidateClassName">UIButton</string>
 						</object>
+						<object class="IBToOneOutletInfo" key="deletechoice">
+							<string key="name">deletechoice</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="grouplistButton">
+							<string key="name">grouplistButton</string>
+							<string key="candidateClassName">UIBarButtonItem</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="insertSection">
 							<string key="name">insertSection</string>
 							<string key="candidateClassName">UIButton</string>
@@ -2270,6 +2357,14 @@
 						<object class="IBToOneOutletInfo" key="insertSectionText">
 							<string key="name">insertSectionText</string>
 							<string key="candidateClassName">UITextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="leavegroupbarbutton">
+							<string key="name">leavegroupbarbutton</string>
+							<string key="candidateClassName">UIBarButtonItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="mainRoomLabel">
+							<string key="name">mainRoomLabel</string>
+							<string key="candidateClassName">UILabel</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="myProgView">
 							<string key="name">myProgView</string>

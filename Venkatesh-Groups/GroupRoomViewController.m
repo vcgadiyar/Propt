@@ -32,6 +32,9 @@
 @synthesize answerChoice3;
 @synthesize answerChoice4;
 @synthesize answerChoice5;
+@synthesize addchoice;
+@synthesize deletechoice;
+@synthesize postConnection;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -55,6 +58,8 @@
     sectionArray=[[NSMutableArray alloc] init];
     cellArray=[[NSMutableArray alloc]init];
     cellCount=[[NSMutableArray alloc]init];
+    
+    
   
     proptQuestions = [[NSMutableArray alloc] init];
     ProptProperties *propts = [[ProptProperties alloc] init];
@@ -71,10 +76,10 @@
     [choices setObject:@"Choice 5" forKey:@"e"];
     
     int z = 0;
-    [propts setProperties:++z andOwner:@"Renaldo" andText:@"Who is the winner" andChoices:choices andCorrectAnswer:@"b" andSelectedAnswer:@""];
+    [propts setProperties:++z andGroupID:z+5 andPosterID:z+8 andStartTime:@"332" andEndTime:@"552" andOwner:@"Renaldo" andText:@"Who is the winner" andChoices:choices andCorrectAnswer:@"b" andSelectedAnswer:@"a"];
     
-    [proptQuestions addObject:propts];
-    
+    //[proptQuestions addObject:propts];
+
     //------------
     propts = [[ProptProperties alloc] init];
     choices = [[NSMutableDictionary alloc] init ];
@@ -86,9 +91,9 @@
     [choices setObject:@"Hey 4" forKey:@"d"];
     [choices setObject:@"Hey 5" forKey:@"e"];
  
-    [propts setProperties:++z andOwner:@"Renaldo2" andText:@"Who is the winner2" andChoices:choices andCorrectAnswer:@"b2" andSelectedAnswer:@""];
+    [propts setProperties:++z andGroupID:z+5 andPosterID:z+8 andStartTime:@"332" andEndTime:@"552" andOwner:@"Renaldo" andText:@"Who is the winner2" andChoices:choices andCorrectAnswer:@"b" andSelectedAnswer:@"a"];
     
-    [proptQuestions addObject:propts];
+   // [proptQuestions addObject:propts];
     
      //------------
     
@@ -101,21 +106,31 @@
     [choices setObject:@"Bye 4" forKey:@"d"];
     [choices setObject:@"Bye 5" forKey:@"e"];
     
-    [propts setProperties:++z andOwner:@"Renaldo2" andText:@"Who is the winner3" andChoices:choices andCorrectAnswer:@"b3" andSelectedAnswer:@""];
+    [propts setProperties:++z andGroupID:z+5 andPosterID:z+8 andStartTime:@"332" andEndTime:@"552" andOwner:@"Renaldo" andText:@"Who is the winner3" andChoices:choices andCorrectAnswer:@"b" andSelectedAnswer:@"a"];
     
-    [proptQuestions addObject:propts];
+ //   [proptQuestions addObject:propts];
     
     //--------
     
-  
-    
+    choiceCount = 2;
+     processingdata = NO;
+    lastTimestampFromDatadase =0;
     counter = 0;
     sectionExanded = -1;
+    
+    createProptTextShowing = NO;
+    questionStartedText = NO;
+    choice1StartedText= NO;
+    choice2StartedText= NO;
+    choice3StartedText= NO;
+    choice4StartedText= NO;
+    choice5StartedText= NO;
     
     self.MIMtableView.autoresizesSubviews = YES;
     choiceExpanding = NO;
     choiceButtonClicked = NO;
     firstRun = YES;
+    initializing = YES;
     
     button= [[UIButton alloc] init];
    
@@ -157,12 +172,201 @@
     [self.view sendSubviewToBack:myProgView];
     
     
+    //[NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(getpropt) userInfo:nil repeats:YES];
     
     
-    [self RefreshPropts];
+   // [self RefreshPropts];
        
         [super viewDidLoad];
 }
+
+-(void)getpropt
+{
+    [NSThread detachNewThreadSelector:@selector(RetrieveDataAndSendToView) toTarget:self withObject:nil];
+}
+
+-(void)RetrieveDataAndSendToView
+{
+    if(processingdata == NO)
+    {
+        processingdata = YES;
+        
+//    NSMutableString *postString = [NSMutableString stringWithString:kGetProptsAfterTime];
+       NSMutableString *postString = [NSMutableString stringWithString:kGetAllPropts]; 
+        
+        int timestamp = 0;
+        
+    if(lastTimestampFromDatadase == 0)
+    {
+        timestamp = 1;
+    }
+    else
+    {
+        timestamp = lastTimestampFromDatadase;
+    }
+    
+        
+   //[postString appendString:[NSString stringWithFormat:@"%d", timestamp]];
+    
+    [postString setString:[postString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    
+    
+    NSURL *url = [NSURL URLWithString:postString];
+    
+    
+    
+    
+    NSData *data = [NSData dataWithContentsOfURL:url];
+        
+        
+    
+    [self performSelectorOnMainThread:@selector(getData:) withObject:data waitUntilDone:YES];
+    }
+}
+
+-(void) getData: (NSData *) data
+{
+    
+    NSError *error;
+    
+    if([data length] > 0)
+    {
+        json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+        
+       
+        
+        // latestpoints = [json objectForKey:@""]; //2
+        NSUInteger index = 0;
+        
+        
+        
+        
+        for (NSDictionary *d in json)
+        {
+            if(index == 0)
+            {
+                NSLog(@"First Time");
+                index++;
+            }
+            
+            NSString *singleID = [d objectForKey:@"ID"];
+            
+            singleID = [singleID stringByReplacingOccurrencesOfString:@"null"
+                                                 withString:@""];
+            
+            
+             NSString *posterID = [d objectForKey:@"Poster_ID"];
+            NSString *singleName = @""; //[d objectForKey:@"name"];
+            
+            NSString *groupID = [d objectForKey:@"Group_ID"];
+                        
+            NSString *text = [d objectForKey:@"Propt_text"];
+        
+            NSString *a = [d objectForKey:@"a"];
+            NSString *b = [d objectForKey:@"b"];
+            NSString *c = [d objectForKey:@"c"];
+            //c = [c stringByReplacingOccurrencesOfString:@"gff" withString:@" "];
+            
+            if([self stringIsEmpty:c] == YES)
+            {
+                c = @"";
+            }
+          
+            
+            NSString *_d = [d objectForKey:@"d"];
+            if([self stringIsEmpty:_d] == YES)
+            {
+                _d = @"";
+            }
+            
+            NSString *e = [d objectForKey:@"e"];
+            if([self stringIsEmpty:e] == YES)
+            {
+                e = @"";
+            }
+            
+             NSString *correctAnswer = [d objectForKey:@"Correct_answer"];
+            if([self stringIsEmpty:correctAnswer] == YES)
+            {
+                correctAnswer = @"";
+            }
+            
+             NSString *startTime = [d objectForKey:@"Start_time"];
+            
+            NSString *endTime = [d objectForKey:@"End_time"];
+            
+            ProptProperties *tempPropt = [[ProptProperties alloc] init];
+            
+            NSMutableDictionary *choices = [[NSMutableDictionary alloc] init ];
+            
+            
+            [choices setObject:a forKey:@"a"];
+            [choices setObject:b forKey:@"b"];
+            [choices setObject:c forKey:@"c"];
+            [choices setObject:_d forKey:@"d"];
+            [choices setObject:e forKey:@"e"];
+            
+            [tempPropt setProperties:singleID andGroupID:groupID andPosterID:posterID andStartTime:startTime andEndTime:endTime andOwner:@"" andText:text andChoices:choices andCorrectAnswer:correctAnswer andSelectedAnswer:@"" ];
+            
+            [proptQuestions addObject:tempPropt];
+            
+            
+            lastTimestampFromDatadase = [[NSDate date] timeIntervalSince1970];  
+            
+            
+        }
+        
+        [self ProcessPropts];
+    }
+    
+
+    
+}
+
+-(BOOL ) stringIsEmpty:(NSString *) aString {
+    
+    if ((NSNull *) aString == [NSNull null]) {
+        return YES;
+    }
+    
+    if (aString == nil) {
+        return YES;
+    } else if ([aString length] == 0) {
+        return YES;
+    } else {
+        aString = [aString stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        if ([aString length] == 0) {
+            return YES;
+        }
+    }
+    
+    return NO;
+}
+
+-(void) ProcessPropts
+{
+    
+    int counter = 0;
+    
+    if ([proptQuestions count] > 0) {
+        
+        [self RefreshPropts];
+
+        
+        // respondball.frame = basketballFrame;
+       // [proptQuestions removeAllObjects];
+        
+        processingdata = NO;
+                
+    }
+    else {
+        processingdata = NO;
+    }
+    
+       
+}
+
+
 
 -(UIView *)CreateAPropt
 {
@@ -181,11 +385,14 @@
     //Text 1
     questionText=[[UITextView alloc]initWithFrame:CGRectMake(1, 1, 310, 49)];
     [questionText setBackgroundColor:[UIColor whiteColor]];
-    [questionText setFont:[UIFont fontWithName:@"Arial-Bold" size:12]];
+    [questionText setFont:[UIFont fontWithName:@"Arial-Bold" size:19]];
+    
+     [questionText setFont:[UIFont systemFontOfSize:15]];
     [questionText setTextColor:[UIColor blackColor]];
     [questionText setText:@"Enter Propt Question"];
     
     [questionText setUserInteractionEnabled:YES];
+    questionText.tag = 0;
     
     questionText.layer.borderWidth = 1.0f;
     questionText.layer.borderColor = [[UIColor grayColor] CGColor];
@@ -203,6 +410,8 @@
      answerChoice1=[[UITextView alloc]initWithFrame:CGRectMake(1, 20 + moveDistance, 310, 25)];
     [answerChoice1 setBackgroundColor:[UIColor whiteColor]];
     [answerChoice1 setFont:[UIFont fontWithName:@"Arial-Bold" size:12]];
+         [answerChoice1 setFont:[UIFont systemFontOfSize:15]];
+    
     [answerChoice1 setTextColor:[UIColor blackColor]];
     [answerChoice1 setText:@"Enter Choice 1"];
     
@@ -210,8 +419,12 @@
     
     answerChoice1.layer.borderWidth = 1.0f;
     answerChoice1.layer.borderColor = [[UIColor grayColor] CGColor];
+    answerChoice1.tag = 1;
+    
     
     answerChoice1.layer.cornerRadius = 6;
+    
+    answerChoice1.delegate = self;
     
     [proptView addSubview:answerChoice1];
     
@@ -224,14 +437,19 @@
     answerChoice2=[[UITextView alloc]initWithFrame:CGRectMake(1, 20 + moveDistance, 310, 25)];
     [answerChoice2 setBackgroundColor:[UIColor whiteColor]];
     [answerChoice2 setFont:[UIFont fontWithName:@"Arial-Bold" size:12]];
+     [answerChoice2 setFont:[UIFont systemFontOfSize:15]];
+    
     [answerChoice2 setTextColor:[UIColor blackColor]];
     [answerChoice2 setText:@"Enter Choice 2"];
     
     [answerChoice2 setUserInteractionEnabled:YES];
+    answerChoice2.tag = 2;
     
     answerChoice2.layer.borderWidth = 1.0f;
     answerChoice2.layer.borderColor = [[UIColor grayColor] CGColor];
     answerChoice2.layer.cornerRadius = 6;
+    
+    answerChoice2.delegate = self;
     
     [proptView addSubview:answerChoice2];
     
@@ -244,14 +462,19 @@
     answerChoice3=[[UITextView alloc]initWithFrame:CGRectMake(1, 20 + moveDistance, 310, 25)];
     [answerChoice3 setBackgroundColor:[UIColor whiteColor]];
     [answerChoice3 setFont:[UIFont fontWithName:@"Arial-Bold" size:11]];
+     [answerChoice3 setFont:[UIFont systemFontOfSize:15]];
     [answerChoice3 setTextColor:[UIColor blackColor]];
     [answerChoice3 setText:@"Enter Choice 3"];
     
     [answerChoice3 setUserInteractionEnabled:YES];
+    answerChoice3.tag = 3;
     
     answerChoice3.layer.borderWidth = 1.0f;
     answerChoice3.layer.borderColor = [[UIColor grayColor] CGColor];
     answerChoice3.layer.cornerRadius = 6;
+    [answerChoice3 setHidden:YES];
+    
+    answerChoice3.delegate = self;
     
     [proptView addSubview:answerChoice3];
     
@@ -263,15 +486,21 @@
     //Text 1
     answerChoice4=[[UITextView alloc]initWithFrame:CGRectMake(1, 20 + moveDistance, 310, 25)];
     [answerChoice4 setBackgroundColor:[UIColor whiteColor]];
-    [answerChoice4 setFont:[UIFont fontWithName:@"Arial-Bold" size:11]];
+    [answerChoice4 setFont:[UIFont fontWithName:@"Arial-Bold" size:16]];
+    [answerChoice4 setFont:[UIFont systemFontOfSize:15]];
+    
     [answerChoice4 setTextColor:[UIColor blackColor]];
     [answerChoice4 setText:@"Enter Choice 4"];
     
     [answerChoice4 setUserInteractionEnabled:YES];
+    answerChoice4.tag = 4;
     
     answerChoice4.layer.borderWidth = 1.0f;
     answerChoice4.layer.borderColor = [[UIColor grayColor] CGColor];
     answerChoice4.layer.cornerRadius = 6;
+    [answerChoice4 setHidden:YES];
+    
+    answerChoice4.delegate = self;
     
     [proptView addSubview:answerChoice4];
     
@@ -283,7 +512,9 @@
     //Text 1
     answerChoice5=[[UITextView alloc]initWithFrame:CGRectMake(1, 20 + moveDistance, 310, 25)];
     [answerChoice5 setBackgroundColor:[UIColor whiteColor]];
-    [answerChoice5 setFont:[UIFont fontWithName:@"Arial-Bold" size:11]];
+    [answerChoice5 setFont:[UIFont fontWithName:@"Arial-Bold" size:13]];
+    [answerChoice5 setFont:[UIFont systemFontOfSize:15]];
+    
     [answerChoice5 setTextColor:[UIColor blackColor]];
     [answerChoice5 setText:@"Enter Choice 5"];
     
@@ -292,13 +523,18 @@
     answerChoice5.layer.borderWidth = 1.0f;
     answerChoice5.layer.borderColor = [[UIColor grayColor] CGColor];
     answerChoice5.layer.cornerRadius = 6;
+    [answerChoice5 setHidden:YES];
+    
+    answerChoice5.delegate = self;
+        answerChoice5.tag = 5;
+    
     
     [proptView addSubview:answerChoice5];
     
     //--------------------------------------
     //Button
     UIButton *cancel=[UIButton buttonWithType:UIButtonTypeCustom];
-    cancel.frame=CGRectMake(10, 190, 56, 27);
+    cancel.frame=CGRectMake(5, 190, 56, 27);
     
     [cancel setTitle:@"Cancel" forState:UIControlStateNormal ];
     [cancel setTitleColor: [UIColor blueColor] forState:UIControlStateNormal];
@@ -314,7 +550,7 @@
     
     //Button
     UIButton *send=[UIButton buttonWithType:UIButtonTypeCustom];
-    send.frame=CGRectMake(240, 190, 56, 27);
+    send.frame=CGRectMake(265, 190, 56, 27);
    
     [send setTitle:@"Send" forState:UIControlStateNormal ];
     [send setTitleColor: [UIColor blueColor] forState:UIControlStateNormal];
@@ -326,6 +562,48 @@
     
     [proptView addSubview:send];
 
+    //-------------------------------------
+    
+    //Button
+    addchoice=[UIButton buttonWithType:UIButtonTypeCustom];
+    addchoice.frame=CGRectMake(70, 190, 82, 27);
+    
+    [addchoice setTitle:@"Add Choice" forState:UIControlStateNormal ];
+    
+    [addchoice setTitleColor: [UIColor colorWithRed:(53/255.f) green:(141/255.f) blue:(74/255.f) alpha:1.0f] forState:UIControlStateNormal];
+    
+    addchoice.backgroundColor = [UIColor whiteColor];
+    
+    [addchoice.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:14]];
+    
+    [[addchoice layer] setBorderWidth:2.0f];
+    [[addchoice layer] setBorderColor:[UIColor greenColor].CGColor];
+    
+    [addchoice addTarget:self action:@selector(AddProptOptionClicked:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [proptView addSubview:addchoice];
+    
+    //-------------------------------------
+    
+    //Button
+    deletechoice=[UIButton buttonWithType:UIButtonTypeCustom];
+    deletechoice.frame=CGRectMake(160, 190, 97, 27);
+    
+    [deletechoice setTitle:@"Delete Choice" forState:UIControlStateNormal ];
+    [deletechoice setTitleColor: [UIColor colorWithRed:(53/255.f) green:(141/255.f) blue:(74/255.f) alpha:1.0f] forState:UIControlStateNormal];
+    
+    deletechoice.backgroundColor = [UIColor whiteColor];
+    
+    [[deletechoice layer] setBorderWidth:2.0f];
+    [[deletechoice layer] setBorderColor:[UIColor greenColor].CGColor];
+    
+    [deletechoice.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:14]];
+    
+    
+    [deletechoice addTarget:self action:@selector(DeleteProptOptionClicked:) forControlEvents:UIControlEventTouchUpInside];
+     [deletechoice setHidden:YES];
+    
+    [proptView addSubview:deletechoice];
     
     
     
@@ -337,6 +615,60 @@
 {
 
     
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    NSLog(@"textViewDidBeginEditing");
+    
+    
+    if(textView.tag == 0)
+    {
+        if(questionStartedText == NO)
+        {
+        [questionText setText:@""];
+            questionStartedText =YES;
+        }
+    }
+    else if(textView.tag == 1)
+    {
+        if(choice1StartedText == NO)
+        {
+        [answerChoice1 setText:@""];
+            choice1StartedText = YES;
+        }
+    }
+    else if(textView.tag == 2)
+    {
+        if(choice2StartedText == NO)
+        {
+            [answerChoice2 setText:@""];
+            choice2StartedText = YES;
+        }
+    }
+    else if(textView.tag == 3)
+    {
+        if(choice3StartedText == NO)
+        {
+            [answerChoice3 setText:@""];
+            choice3StartedText = YES;
+        }
+    }
+    else if(textView.tag == 4)
+    {
+        if(choice4StartedText == NO)
+        {
+            [answerChoice4 setText:@""];
+            choice4StartedText = YES;
+        }
+    }
+    else if(textView.tag == 5)
+    {
+        if(choice5StartedText == NO)
+        {
+            [answerChoice5 setText:@""];
+            choice5StartedText = YES;
+        }
+    }
 }
 
 
@@ -416,11 +748,11 @@
     //Main Room Label
     
     //Label
-    UILabel *mainRoomLabel=[[UILabel alloc]initWithFrame:CGRectMake(120, -14, 200, 50)];
+    mainRoomLabel=[[UILabel alloc]initWithFrame:CGRectMake(120, -14, 200, 50)];
     [mainRoomLabel setBackgroundColor:[UIColor clearColor]];
     [mainRoomLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:16]];
     [mainRoomLabel setTextColor:[UIColor whiteColor]];
-    [mainRoomLabel setText:@"Blane Lakers Room"];
+    [mainRoomLabel setText:@"Chris Patriots Room"];
     [progView addSubview:mainRoomLabel];
     
     //----------------------------
@@ -561,27 +893,72 @@
 
 -(void) RefreshPropts
 {
+  //  [sectionArray removeAllObjects];
+    // [cellArray removeAllObjects];
+    // [cellCount removeAllObjects];
     
     for(ProptProperties *item in proptQuestions)
     {
+        if (item.Imported == NO) {
+         
+            item.Imported = YES;
         [sectionArray addObject:[item text]];
         
          int row = [sectionArray count]-1;
         
-        NSMutableArray *_cellArray=[[NSMutableArray alloc]initWithObjects:[[item choices] objectForKey:@"a"],[[item choices] objectForKey:@"b"], [[item choices] objectForKey:@"c"], [[item choices] objectForKey:@"d"], [[item choices] objectForKey:@"e"], nil];
+        NSMutableArray *_cellArray;
+        
+        if([[item choices] objectForKey:@"c"] == @"")
+        {
+        _cellArray =[[NSMutableArray alloc]initWithObjects:[[item choices] objectForKey:@"a"],[[item choices] objectForKey:@"b"], nil];
+        }
+        else if ([[item choices] objectForKey:@"d"] == @"")
+        {
      
+        _cellArray=[[NSMutableArray alloc]initWithObjects:[[item choices] objectForKey:@"a"],[[item choices] objectForKey:@"b"], [[item choices] objectForKey:@"c"], nil];
+        }
+        else if ([[item choices] objectForKey:@"e"] == @"")
+        {
+            
+            _cellArray=[[NSMutableArray alloc]initWithObjects:[[item choices] objectForKey:@"a"],[[item choices] objectForKey:@"b"], [[item choices] objectForKey:@"c"],[[item choices] objectForKey:@"d"], nil];
+        }
+        else 
+        {
+            
+            _cellArray=[[NSMutableArray alloc]initWithObjects:[[item choices] objectForKey:@"a"],[[item choices] objectForKey:@"b"], [[item choices] objectForKey:@"c"],[[item choices] objectForKey:@"d"], [[item choices] objectForKey:@"e"], nil];
+        }
+        
+        
         [cellArray addObject:_cellArray];
         
         int cellArrayCount = [[cellArray objectAtIndex:row] count];
         
-        [cellCount addObject:  [NSNumber numberWithInt:cellArrayCount]];
+       // if(initializing == YES)
+        {
+            [cellCount addObject:  [NSNumber numberWithInt:0]];
+        }
+        }
+       // else
+        {
+        
+          //  [cellCount addObject:  [NSNumber numberWithInt:cellArrayCount]];
+        }
     }
-
-    //[MIMtableView reloadData];
     
-    for(int i=0;i< [sectionArray count];i++)
+  //  if(initializing == YES)
     {
-        [self choiceSelected:i];
+        
+    [MIMtableView reloadData];
+        
+        initializing = NO;
+    }
+  //  else
+    {
+    
+   // for(int i=0;i< [sectionArray count];i++)
+    {
+        //[self choiceSelected:i];
+    }
     }
 }
 - (void)AddPropt
@@ -674,7 +1051,10 @@
     NSString *letterTransformation = [[NSString alloc] init];
     letterTransformation = [temppropt.selectedAnswer stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     
-    
+    if(section == 14)
+    {
+        int e =3;
+    }
     
     //Background Image
     UIImageView *headerBg=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"proptbackground.png"]];
@@ -715,7 +1095,7 @@
     [votes setBackgroundColor:[UIColor clearColor]];
     [votes setFont:[UIFont fontWithName:@"Helvetica" size:11]];
     [votes setTextColor:[UIColor colorWithRed:(61/255.f) green:(151/255.f) blue:(217/255.f) alpha:1.0f]];
-    [votes setText:@"100 votes"];
+    [votes setText:@" "];
     [headerView addSubview:votes];
     
 
@@ -816,7 +1196,7 @@
     [text setBackgroundColor:[UIColor clearColor]];
     [text setFont:[UIFont fontWithName:@"Arial-Bold" size:11]];
     [text setTextColor:[UIColor colorWithRed:(48/255.f) green:(104/255.f) blue:(198/255.f) alpha:1.0f]];
-    [text setText:@"Blaaa blaaaa blaaaa fdfddfdfdf fdfdfd...."];
+    [text setText:[sectionArray objectAtIndex:section]];
     
     [text setUserInteractionEnabled:NO];
     [headerView addSubview:text];
@@ -864,6 +1244,8 @@
     [headerTitle setTextColor:[UIColor darkGrayColor]];
     [headerTitle setText:[sectionArray objectAtIndex:section]];
     [headerView addSubview:headerTitle];*/
+    
+
     
     
     return  headerView;
@@ -1024,7 +1406,7 @@
         
     temppropt.selectedAnswer = @"";
     
-    [MIMtableView reloadSections:[NSIndexSet indexSetWithIndex:_index]  withRowAnimation:UITableViewRowAnimationAutomatic ];
+    [MIMtableView reloadSections:[NSIndexSet indexSetWithIndex:_index]  withRowAnimation:UITableViewRowAnimationFade ];
     }
 
    // sectionExanded = -1;
@@ -1036,10 +1418,12 @@
 {
     
     [cellCount replaceObjectAtIndex:choiceIndex withObject:[NSNumber numberWithInt:0]];
+    
     NSIndexPath *path1 = [NSIndexPath indexPathForRow:0 inSection:choiceIndex]; //ALSO TRIED WITH
     NSArray *indexArray = [NSArray arrayWithObjects:path1,nil];
     
-    [MIMtableView reloadSections:[NSIndexSet indexSetWithIndex:choiceIndex]  withRowAnimation:UITableViewRowAnimationAutomatic ];
+    [MIMtableView reloadSections:[NSIndexSet indexSetWithIndex:choiceIndex]  withRowAnimation:UITableViewRowAnimationFade ];
+    
     
 }
 
@@ -1054,11 +1438,11 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    /*if([cellCount count] == 0)
+    //if(initializing == YES)
     {
-        return 0;
+      //  return 0;
     }
-    else*/
+   // else
     {
         int x = [[cellCount objectAtIndex:section] intValue];
         return x;
@@ -1142,7 +1526,11 @@
     [cellTitle setTextColor:[UIColor blackColor]];
     
     NSInteger section = indexPath.section;
-    [cellTitle setText:[[cellArray objectAtIndex:section] objectAtIndex:indexPath.row]];
+    NSInteger row1 = indexPath.row;
+    
+    NSInteger rowsec = [tableView numberOfRowsInSection:section];
+    
+    [cellTitle setText:[[cellArray objectAtIndex:section] objectAtIndex:row1]];
 
     [cell.contentView addSubview:cellTitle];
     
@@ -1190,9 +1578,7 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert" message:@"Alert Message" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
-    [alert show];
-    
+      
     return YES;
 }
 
@@ -1209,16 +1595,175 @@
 
 - (IBAction)SendProptClicked:(id)sender {
     
+    if ([self constructPostMessage] == YES) {
+        
+         [self.view endEditing:TRUE];
+        
+    }
+    else
+    {
+        
+    }
     
     
     
-     [self.view endEditing:TRUE];
 }
+
+-(Boolean) constructPostMessage
+{
+            
+        NSMutableArray * dataArray = [[NSMutableArray alloc] init];  
+    
+    if( ([[questionText.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] isEqualToString:@""]) || ([[answerChoice1.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] isEqualToString:@""]) || ([[answerChoice2.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] isEqualToString:@""]))
+         {
+         
+             UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Cannot have blank text for question, or answer choices 1 and 2!"
+                                                               message:@"Blank Text"
+                                                              delegate:nil
+                                                     cancelButtonTitle:@"OK"
+                                                     otherButtonTitles:nil];
+             
+             [message show];
+             return NO;
+   
+         }
+    else
+    {
+        
+        // letterTransformation = [temppropt.selectedAnswer stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        
+        
+        [dataArray addObject:[NSString stringWithFormat:@"%@", questionText.text]];
+        [dataArray addObject:[NSString stringWithFormat:@"%@", answerChoice1.text]];
+        [dataArray addObject:[NSString stringWithFormat:@"%@", answerChoice2.text]];
+        // [dataArray addObject:[NSString stringWithFormat:@"%@", answerChoice3.text]];
+        // [dataArray addObject:[NSString stringWithFormat:@"%@", answerChoice4.text]];
+        // [dataArray addObject:[NSString stringWithFormat:@"%@", answerChoice5.text]];
+        [dataArray addObject:[NSString stringWithFormat:@"%d", 1]];
+        
+        [dataArray addObject:[NSString stringWithFormat:@"%d", 1]];
+        
+        [dataArray addObject:[NSString stringWithFormat:@"%d", [[NSDate date] timeIntervalSince1970]]];
+        
+        [dataArray addObject:[NSString stringWithFormat:@"%d", [[NSDate date] timeIntervalSince1970] + 120]];
+        
+        
+        [NSThread detachNewThreadSelector:@selector(postMessage:) toTarget:self withObject:dataArray];
+        
+        return YES;
+    
+    }
+   
+}
+
+
+-(void) postMessage: (NSMutableArray*) data
+{
+    if([data objectAtIndex:0] != nil && [data objectAtIndex:1] != nil)
+    {
+        NSMutableString *postString = [NSMutableString stringWithString:kGetInsertPropt];
+        
+        [postString appendString:[NSString stringWithFormat:@"&%@=%@", propt_text, [data objectAtIndex:0]]];
+        
+        [postString appendString:[NSString stringWithFormat:@"&%@=%@", aOption, [data objectAtIndex:1]]];
+        
+        
+        [postString appendString:[NSString stringWithFormat:@"&%@=%@", bOption,[data objectAtIndex:2]]];
+        
+        //[postString appendString:[NSString stringWithFormat:@"&%@=%@", cOption,[data objectAtIndex:3]]];
+        
+        //[postString appendString:[NSString stringWithFormat:@"&%@=%@", dOption,[data objectAtIndex:4]]];
+        
+        
+       // [postString appendString:[NSString stringWithFormat:@"&%@=%@", eOption,[data objectAtIndex:5]]];
+        
+        [postString appendString:[NSString stringWithFormat:@"&%@=%@", poster_id,[data objectAtIndex:3]]];
+        
+        [postString appendString:[NSString stringWithFormat:@"&%@=%@", group_id,[data objectAtIndex:4]]];
+        
+          [postString appendString:[NSString stringWithFormat:@"&%@=%@", start_time,[data objectAtIndex:5]]];
+        
+          [postString appendString:[NSString stringWithFormat:@"&%@=%@", end_time,[data objectAtIndex:6]]];
+        
+        
+        [postString setString:[postString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:postString]];
+        
+        [request setHTTPMethod:@"POST"];
+        
+        
+        postConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
+        
+    }
+}
+
+
+
+- (IBAction)AddProptOptionClicked:(id)sender {
+    
+    if(choiceCount == 2)
+    {
+          [answerChoice3 setHidden:NO];
+        [deletechoice setHidden:NO];
+        choiceCount = 3;
+    }
+    else if(choiceCount == 3)
+    {
+        [answerChoice4 setHidden:NO];
+        choiceCount = 4;
+    }
+    else if(choiceCount == 4)
+    {
+        [answerChoice5 setHidden:NO];
+        choiceCount = 5;
+        [addchoice setHidden:YES];
+    }
+    
+    
+}
+
+- (IBAction)DeleteProptOptionClicked:(id)sender {
+    
+    if(choiceCount == 2)
+    {
+        //[answerChoice3 setHidden:NO];
+        //choiceCount = 3;
+        [answerChoice4 setHidden:YES];
+        [deletechoice setHidden:YES];
+    }
+    else if(choiceCount == 3)
+    {
+        [answerChoice3 setHidden:YES];
+        choiceCount = 2;
+        [deletechoice setHidden:YES];
+    }
+    else if(choiceCount == 4)
+    {
+        [answerChoice4 setHidden:YES];
+        choiceCount = 3;
+    }
+    else if(choiceCount == 5)
+    {
+        [answerChoice5 setHidden:YES];
+        choiceCount = 4;
+        [addchoice setHidden:NO];
+    }
+    
+    
+}
+
 
 - (IBAction)CancelProptClicked:(id)sender {
     
     
     [self HidePropt];
+    
+    [mainRoomLabel setTextColor:[UIColor whiteColor]];
+    [mainRoomLabel setText:@"Chris Patriots Room"];
+    
+
+
     
 }
 
@@ -1240,54 +1785,37 @@
 
 - (IBAction)insertSectionPressed:(id)sender {
    
-    [button sendActionsForControlEvents: UIControlEventTouchUpInside];
-    
-}
-
-- (IBAction)addrowPressed:(id)sender {
-    
-
-    
-      [UIView beginAnimations:@"UIBase Hide" context:nil];
-  
-    
-    if(firstRun == YES)
-    {
-  
-     //   [questionText becomeFirstResponder];
-    
-    [UIView setAnimationDuration:.5];
-    [UIView setAnimationCurve: UIViewAnimationCurveEaseInOut];
-        [UIView setAnimationDelegate:self];
-        [UIView setAnimationDidStopSelector:@selector(MoveDidStop:finished:context:)];
-        
-    myProptView.frame = CGRectMake(1, 450, 320, 400);
-        
-        firstRun = NO;
-    }
-    else
-    {
-        [questionText becomeFirstResponder];
-        
-        [UIView setAnimationDuration:.5];
-        [UIView setAnimationCurve: UIViewAnimationCurveEaseInOut];
-        [UIView setAnimationDelegate:self];
-        [UIView setAnimationDidStopSelector:@selector(MoveDidStop:finished:context:)];
-        
-        myProptView.frame = CGRectMake(1, 20, 320, 400);
-        
-        firstRun = YES;
-        
-    }
-    [UIView commitAnimations];
-    
    
+    
 }
+
 
 - (void)MoveDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
 {
     if (firstRun == NO) {
         [self.view endEditing:TRUE];
+        
+        questionStartedText = NO;
+        choice1StartedText= NO;
+        choice2StartedText= NO;
+        choice3StartedText= NO;
+        choice4StartedText= NO;
+        choice5StartedText= NO;
+        
+        [answerChoice3 setHidden:YES];
+        [answerChoice4 setHidden:YES];
+        [answerChoice5 setHidden:YES];
+        
+        
+        [questionText setText:@""];
+        [answerChoice1 setText:@"Enter Choice"];
+        [answerChoice2 setText:@"Enter Choice"];
+        [answerChoice3 setText:@"Enter Choice"];
+        [answerChoice4 setText:@"Enter Choice"];
+        [answerChoice5 setText:@"Enter Choice"];
+        
+        [deletechoice setHidden:YES];
+        [addchoice setHidden:NO];
     }
    
 }
@@ -1306,7 +1834,7 @@
     
     
     [UIView beginAnimations:@"UIBase Hide" context:nil];
-    
+    createProptTextShowing = YES;
     
    // if(firstRun == YES)
     {
@@ -1320,6 +1848,10 @@
         myProptView.frame = CGRectMake(1, 20, 320, 400);
         
         firstRun = YES;
+        
+        
+        [mainRoomLabel setTextColor:[UIColor whiteColor]];
+        [mainRoomLabel setText:@"Enter Propt Question"];
         
     }
    /* else
@@ -1338,10 +1870,54 @@
        
         
     }*/
-    [UIView commitAnimations];
+
+[UIView commitAnimations];
     
     
 }
 
 
+- (IBAction)leavegroupbarbutton:(id)sender {
+    
+   // [sectionArray removeAllObjects];
+   // [cellArray removeAllObjects];
+   // [cellCount removeAllObjects];
+  //  [proptQuestions removeAllObjects];
+    
+    
+   // [MIMtableView reloadData];
+    
+    [self getpropt];
+}
+- (IBAction)groupListPressed:(id)sender {
+    
+    NSMutableString *postString = [NSMutableString stringWithString:kDeleteAllPropts];
+
+    
+    [postString setString:[postString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:postString]];
+    
+    [request setHTTPMethod:@"POST"];
+    
+    
+    postConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
+    
+}
+
+- (IBAction)newbutton:(id)sender {
+    
+    NSMutableString *postString = [NSMutableString stringWithString:kDeleteAllPropts];
+    
+    
+    [postString setString:[postString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:postString]];
+    
+    [request setHTTPMethod:@"POST"];
+    
+    
+    postConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
+    
+}
 @end

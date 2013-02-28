@@ -19,7 +19,16 @@
 @synthesize dataTime;
 @synthesize FirstRun;
 
-- (void) setProperties: (NSInteger) aId andOwner:(NSString *)aOwner andText:(NSString *) atext  andChoices:(NSMutableDictionary *)aChoices andCorrectAnswer:(NSString * )aCorrect andSelectedAnswer: (NSString *)aSelectedAnswer
+@synthesize groupId;
+@synthesize posterId;
+@synthesize startTime;
+@synthesize endTime;
+
+
+
+
+
+- (void) setProperties: (NSInteger) aId andGroupID: (NSInteger)agroupId andPosterID: (NSInteger) aposterId andStartTime:(NSString *)astartTime andEndTime:(NSString *)aendTime  andOwner:(NSString *)aOwner andText:(NSString *) atext  andChoices:(NSMutableDictionary *)aChoices andCorrectAnswer:(NSString * )aCorrect andSelectedAnswer: (NSString *)aSelectedAnswer;
 {
     Id = aId;
     owner = aOwner;
@@ -27,8 +36,13 @@
     choices = aChoices;
     correctAnswer = aCorrect;
     selectedAnswer = aSelectedAnswer;
-    FirstRun = YES;
-  
+    
+    groupId = agroupId;
+    posterId = aposterId;
+    startTime = astartTime;
+    endTime = aendTime;
+    Imported = NO;
+
 }
 
 
