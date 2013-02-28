@@ -1898,10 +1898,10 @@
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:postString]];
     
-    [request setHTTPMethod:@"POST"];
+   // [request setHTTPMethod:@"POST"];
     
     
-    postConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
+   // postConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
     
 }
 
